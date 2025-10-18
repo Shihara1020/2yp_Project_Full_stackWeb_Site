@@ -1,0 +1,9 @@
+
+/* use for hidden and display logging and admin pannel */
+.hidden-section{
+    display:none   !important;
+}
+
+.show-flex{
+    display:flex   !important;
+}

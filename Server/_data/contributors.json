@@ -1,0 +1,43 @@
+[
+  {
+    "_id": "652fa9e8bcbf9c001f23a111",
+    "name": "Dr. Sarah Johnson",
+    "email": "sarah.johnson@neuromphis.com",
+    "position": "Senior Research Scientist",
+    "department": "Research",
+    "bio": "Dr. Johnson specializes in neuromorphic computing architectures and has over 10 years of experience in the field.",
+    "expertise": ["Neuromorphic Computing", "Machine Learning", "Neural Networks"],
+    "socialLinks": {
+      "linkedin": "https://linkedin.com/in/sarahjohnson",
+      "github": "https://github.com/sarahjohnson"
+    },
+    "isActive": true
+  },
+  {
+    "_id": "652fa9e8bcbf9c001f23a222",
+    "name": "Prof. Michael Chen",
+    "email": "michael.chen@neuromphis.com",
+    "position": "Research Director",
+    "department": "Research",
+    "bio": "Prof. Chen leads the neuromorphic research division and has published over 50 papers in top-tier journals.",
+    "expertise": ["Artificial Intelligence", "Computer Vision", "Deep Learning"],
+    "socialLinks": {
+      "linkedin": "https://linkedin.com/in/michaelchen",
+      "twitter": "https://twitter.com/michaelchen"
+    },
+    "isActive": true
+  },
+  {
+    "_id": "652fa9e8bcbf9c001f23a333",
+    "name": "Dr. Emily Rodriguez",
+    "email": "emily.rodriguez@neuromphis.com",
+    "position": "Hardware Engineer",
+    "department": "Development",
+    "bio": "Dr. Rodriguez designs and develops neuromorphic hardware solutions for next-generation computing systems.",
+    "expertise": ["Hardware Design", "VLSI", "Neuromorphic Chips"],
+    "socialLinks": {
+      "linkedin": "https://linkedin.com/in/emilyrodriguez"
+    },
+    "isActive": true
+  }
+]

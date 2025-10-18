@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Breakthrough in Neuromorphic Computing Achieved",
+    "summary": "Our research team has achieved a significant breakthrough in neuromorphic computing, developing a new chip architecture that mimics brain function.",
+    "content": "In a groundbreaking development, the Neuromphis Research Center has successfully created a revolutionary neuromorphic chip that processes information similarly to the human brain. This achievement represents a major leap forward in artificial intelligence and could transform how we approach computing problems. The new chip demonstrates unprecedented energy efficiency while maintaining high performance levels, making it ideal for applications in autonomous vehicles, robotics, and edge computing devices.",
+    "author":"652fa9e8bcbf9c001f23a111",
+    "category": "Research Breakthrough",
+    "tags": ["neuromorphic computing", "AI", "breakthrough", "chip design"],
+    "isPublished": true,
+    "isFeatured": true,
+    "publishDate": "2025-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "New Publication in Nature Neuroscience",
+    "summary": "Our latest research on synaptic plasticity in artificial neural networks has been published in Nature Neuroscience.",
+    "content": "We are pleased to announce that our research paper titled 'Adaptive Synaptic Plasticity in Neuromorphic Systems' has been accepted for publication in Nature Neuroscience. This work explores novel approaches to implementing learning mechanisms in artificial neural networks that closely mimic biological synapses. The research demonstrates significant improvements in learning efficiency and adaptation capabilities, opening new possibilities for more intelligent and flexible AI systems.",
+    "author":"652fa9e8bcbf9c001f23a111",
+    "category": "Publication",
+    "tags": ["publication", "neural networks", "synaptic plasticity", "Nature"],
+    "isPublished": true,
+    "isFeatured": false,
+    "publishDate": "2025-10-08T00:00:00.000Z"
+  },
+  {
+    "title": "Collaboration with MIT Announced",
+    "summary": "Neuromphis Research Center announces a strategic partnership with MIT's Computer Science and Artificial Intelligence Laboratory.",
+    "content": "We are excited to announce a new collaboration with the prestigious MIT Computer Science and Artificial Intelligence Laboratory (CSAIL). This partnership will focus on advancing the field of neuromorphic computing through joint research initiatives, student exchange programs, and shared resources. The collaboration aims to accelerate the development of brain-inspired computing technologies and their practical applications in various industries.",
+    "author":"652fa9e8bcbf9c001f23a111",
+    "category": "Collaboration",
+    "tags": ["MIT", "collaboration", "partnership", "research"],
+    "isPublished": true,
+    "isFeatured": true,
+    "publishDate": "2025-10-05T00:00:00.000Z"
+  }
+]
