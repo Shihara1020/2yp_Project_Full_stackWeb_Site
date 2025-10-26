@@ -3,9 +3,13 @@ const dotenv=require('dotenv');
 const morgan=require('morgan');
 const colorse=require('colors');
 const connectDB=require('./config/db');
-const fileupload=require('express-fileupload');
 const cookieParser=require('cookie-parser');
 const cors=require('cors');
+const path = require('path');
+
+
+
+
 //First Load the env variable
 dotenv.config({path:'./config/config.env'});
 
@@ -15,20 +19,38 @@ connectDB();
 //Route files
 const auth=require('./router/auth');
 const contributors=require('./router/contributors');
-const events=require('./router/events');
+const publications=require('./router/publications');
 const news=require('./router/news');
 const projects=require('./router/projects');
 const admin=require('./router/admin');
+const blogs=require('./router/blogs');
 
 //create a express app
 const app=express();
 
 
 // Enable CORS
+// List of allowed origins
+const allowedOrigins = [
+  "http://127.0.0.1:5500", // Admin panel
+  "http://127.0.0.1:5501", // User frontend (change if different)
+];
+
+// CORS middleware
 app.use(cors({
-    origin: "http://127.0.0.1:5500",
-    credentials: true}
-));
+  origin: function(origin, callback){
+    // Allow requests with no origin (like Postman, mobile apps, curl)
+    if(!origin) return callback(null, true);
+
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true,  // Allow cookies/auth headers if needed
+}));
+
 
 //body parser
 app.use(express.json());
@@ -45,9 +67,11 @@ if(process.env.NODE_ENV==="development"){
     app.use(morgan('dev'));
 }
 
-// File uploading
-app.use(fileupload());
 
+
+//Serve uploaded images
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 
 //*********************
@@ -55,10 +79,11 @@ app.use(fileupload());
 //*********************
 app.use('/api/v1/auth',auth);
 app.use('/api/v1/contributors',contributors);
-app.use('/api/v1/events',events);
+app.use('/api/v1/publications',publications);
 app.use('/api/v1/news',news);
 app.use('/api/v1/projects',projects);
 app.use('/api/v1/admin',admin);
+app.use('/api/v1/blogs',blogs);
 
 
 //*************** */ 

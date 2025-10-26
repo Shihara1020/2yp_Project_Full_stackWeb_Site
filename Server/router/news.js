@@ -1,21 +1,22 @@
 const express=require('express');
 const router=express.Router();
-const {getNews,getSingleNews,getFeaturedNews,deleteNews,updateNews,createNews,getNewsByslug}=require('../controller/news');
+const {getNews,getSingleNews,deleteNews,updateNews,createNews,getNewsBySlug}=require('../controller/news');
 
 
 const {protect,authorize}=require('../middleware/auth');
+const upload=require('../middleware/upload');
 
-
-router.route('/featured').get(getFeaturedNews);
 router.route('/')
                 .get(getNews)
-                .post(protect,authorize('admin','publisher'),createNews);
+                .post(protect,authorize('Admin'),upload.single("image"),createNews);
+
+router.route('/slug/:slug').get(getNewsBySlug);
 
 router.route('/:id')
-                .delete(protect,authorize('admin','publisher'),deleteNews)
-                .put(protect,authorize('admin','publisher'),updateNews)
+                .delete(protect,authorize('Admin'),deleteNews)
+                .put(protect,authorize('Admin'),upload.single("image"),updateNews)
                 .get(getSingleNews)
             
-router.route('/slug/:slug').get(getNewsByslug);
+
 
 module.exports=router;

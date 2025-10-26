@@ -10,8 +10,11 @@ dotenv.config({path: './config/config.env'});
 const User=require('./models/User');
 const Contributor=require('./models/Contributor');
 const News=require('./models/News');
-const Event=require('./models/Event');
+const Event=require('./models/Publication');
 const Project=require('./models/Project');
+const Blog=require('./models/Blog');
+const Publication = require('./models/Publication');
+
 
 
 // Connect to DB
@@ -35,12 +38,16 @@ const news=JSON.parse(
     fs.readFileSync(`${__dirname}/_data/news.json`,'utf-8')
 );
 
-const events=JSON.parse(
-    fs.readFileSync(`${__dirname}/_data/event.json`,'utf-8')
+const publications=JSON.parse(
+    fs.readFileSync(`${__dirname}/_data/publications.json`,'utf-8')
 );
 
 const project=JSON.parse(
-    fs.readFileSync(`${__dirname}/_data/project.json`,'utf-8')
+    fs.readFileSync(`${__dirname}/_data/projects.json`,'utf-8')
+);
+
+const blogs=JSON.parse(
+    fs.readFileSync(`${__dirname}/_data/blogs.json`,'utf-8')
 );
 
 
@@ -52,8 +59,9 @@ const importData=async()=>{
         await Contributor.create(contributors);
         
         await News.create(news);
-        await Event.create(events);
+        await Event.create(publications);
         await Project.create(project);
+        await Blog.create(blogs);
 
         
         console.log('Data Imported....'.green.inverse);
@@ -69,8 +77,9 @@ const deleteData=async()=>{
         await User.deleteMany();
         await Contributor.deleteMany();
         await News.deleteMany();
-        await Event.deleteMany();
+        await Publication.deleteMany();
         await Project.deleteMany();
+        await Blog.deleteMany();
         console.log('Data Destroyed....'.red.inverse);
         process.exit()
     }catch(err){

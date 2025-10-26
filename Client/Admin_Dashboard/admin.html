@@ -20,6 +20,16 @@
       nomodule=""
       src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"
     ></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Select2 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   </head>
 
   <body>
@@ -92,9 +102,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" data-section="events">
+            <a class="nav-link" href="#" data-section="publication">
               <i class="fas fa-calendar"></i>
-              <span>Events</span>
+              <span>Publication</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-section="blogs">
+              <i class="fas fa-user-cog"></i>
+              <span>Blogs</span>
             </a>
           </li>
           <li class="nav-item">
@@ -144,7 +160,7 @@
             </div>
             <div class="stat-card success">
               <div class="stat-content">
-                <h4>News Articles</h4>
+                <h4>News</h4>
                 <h2 id="totalNews">0</h2>
               </div>
               <div class="stat-icon">
@@ -153,7 +169,7 @@
             </div>
             <div class="stat-card warning">
               <div class="stat-content">
-                <h4>Events</h4>
+                <h4>Blogs</h4>
                 <h2 id="totalEvents">0</h2>
               </div>
               <div class="stat-icon">
@@ -221,11 +237,11 @@
                 <table id="contributorsTable">
                   <thead>
                     <tr>
+                      <th></th>
                       <th>Name</th>
                       <th>Email</th>
                       <th>Position</th>
-                      <th>Department</th>
-                      <th>Status</th>
+                      <th>Phone</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -264,17 +280,18 @@
                 <table id="newsTable">
                   <thead>
                     <tr>
+                      <th>Image</th>
                       <th>Title</th>
                       <th>Author</th>
-                      <th>Category</th>
-                      <th>Status</th>
-                      <th>Published Date</th>
+                      <th>Date</th>
+                      <th>Brief</th>
+                      <th>Link</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td colspan="6" style="text-align: center">
+                      <td colspan="7" style="text-align: center">
                         Loading news...
                       </td>
                     </tr>
@@ -285,8 +302,8 @@
           </div>
         </div>
 
-        <!-- Events Section -->
-        <div id="events" class="content-section">
+        <!-- Publications Section -->
+        <div id="publication" class="content-section">
           <div
             class="section-header"
             style="
@@ -296,28 +313,72 @@
               margin-bottom: 20px;
             "
           >
-            <h2>Events Management</h2>
-            <button class="btn btn-primary" onclick="openEventModal()">
-              <i class="fas fa-plus"></i>Add Event
+            <h2>Publications Management</h2>
+            <button class="btn btn-primary" onclick="openPublicationModal()">
+              <i class="fas fa-plus"></i>Add Publications
             </button>
           </div>
           <div class="card">
             <div class="card-body">
               <div class="table-container">
-                <table id="eventsTable">
+                <table id="publicationsTable">
                   <thead>
                     <tr>
                       <th>Title</th>
-                      <th>Type</th>
-                      <th>Start Date</th>
-                      <th>Status</th>
-                      <th>Organizer</th>
+                      <th>Authors</th>
+                      <th>Journal</th>
+                      <th>Year</th>
+                      <th>DOI</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td colspan="6" style="text-align: center">
+                        Loading publications...
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blogs Section -->
+        <div id="blogs" class="content-section">
+          <div
+            class="section-header"
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 20px;
+            "
+          >
+            <h2>Blogs Management</h2>
+            <button class="btn btn-primary" onclick="openBlogModal()">
+              <i class="fas fa-plus"></i>Add Blog
+            </button>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="table-container">
+                <table id="blogsTable">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Author</th>
+                      <th>Date</th>
+                      <th>Read Time</th>
+                      <th>Views</th>
+                      <th>Link</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="7" style="text-align: center">
                         Loading events...
                       </td>
                     </tr>
@@ -350,17 +411,19 @@
                 <table id="projectsTable">
                   <thead>
                     <tr>
+                      <th>Image</th>
                       <th>Title</th>
-                      <th>Category</th>
+                      <th>Tags</th>
                       <th>Status</th>
-                      <th>Progress</th>
-                      <th>Team Lead</th>
+                      <th>Duration</th>
+                      <th>Contributors</th>
+                      <th>Technologies</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td colspan="6" style="text-align: center">
+                      <td colspan="7" style="text-align: center">
                         Loading projects...
                       </td>
                     </tr>
@@ -437,24 +500,65 @@
           <form id="contributorForm">
             <input type="hidden" id="contributorId" />
 
+            <!-- Profile Image Upload Section -->
+            <div class="form-group image-upload-section">
+              <label class="image-upload-label">
+                <input
+                  type="file"
+                  class="form-control"
+                  id="contributorImage"
+                  accept="image/*"
+                  style="display: none"
+                />
+                <div class="image-upload-area">
+                  <img
+                    id="imagePreview"
+                    src=""
+                    alt="Preview"
+                    style="display: none"
+                  />
+                  <div id="uploadPlaceholder" class="upload-placeholder">
+                    <img
+                      src="./img_dashbord/from-icon/upload.svg"
+                      class="upload-icon"
+                    />
+                    <span>Upload Photo</span>
+                  </div>
+                </div>
+              </label>
+            </div>
+
             <div class="form-row">
               <div class="form-group">
-                <label for="contributorName" class="form-label"
-                  >Full Name</label
+                <label for="contributorName" class="form-label">
+                  <img
+                    src="./img_dashbord/from-icon/people1.svg"
+                    class="form-icons"
+                  />
+                  Full Name</label
                 >
                 <input
                   type="text"
                   class="form-control"
                   id="contributorName"
+                  placeholder="Enter full nmae"
                   required
                 />
               </div>
+
               <div class="form-group">
-                <label for="contributorEmail" class="form-label">Email</label>
+                <label for="contributorEmail" class="form-label">
+                  <img
+                    src="./img_dashbord/from-icon/email.svg"
+                    class="form-icon"
+                  />
+                  Email</label
+                >
                 <input
                   type="email"
                   class="form-control"
                   id="contributorEmail"
+                  placeholder="eXXX@eng.pdn.ac.lk"
                   required
                 />
               </div>
@@ -462,83 +566,35 @@
 
             <div class="form-row">
               <div class="form-group">
-                <label for="contributorPosition" class="form-label"
-                  >Position</label
+                <label for="contributorPosition" class="form-label">
+                  <img
+                    src="./img_dashbord/from-icon/position.svg"
+                    class="form-icon"
+                  />
+                  Position</label
                 >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="contributorPosition"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="contributorDepartment" class="form-label"
-                  >Department</label
-                >
-                <select
-                  class="form-control"
-                  id="contributorDepartment"
-                  required
-                >
-                  <option value="">Select Department</option>
-                  <option value="Neuroscience">Neuroscience</option>
-                  <option value="Research">Research</option>
-                  <option value="Clinical">Clinical</option>
-                  <option value="Administration">Administration</option>
-                  <option value="Technology">Technology</option>
+                <select class="form-control" id="contributorPosition" required>
+                  <option value="">Select Position</option>
+                  <option value="Lecture">Lecture</option>
+                  <option value="Student">Student</option>
                 </select>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label for="contributorBio" class="form-label">Bio</label>
-              <textarea
-                class="form-control"
-                id="contributorBio"
-                rows="3"
-              ></textarea>
-            </div>
+              <div class="form-group">
+                <label for="contributorPhone" class="form-label">
+                  <img
+                    src="./img_dashbord/from-icon/phone.svg"
+                    class="form-icon"
+                  />
+                  Phone
+                </label>
 
-            <div class="form-row">
-              <div class="form-group">
-                <label for="contributorPhone" class="form-label">Phone</label>
-                <input type="tel" class="form-control" id="contributorPhone" />
-              </div>
-              <div class="form-group">
-                <label for="contributorLinkedIn" class="form-label"
-                  >LinkedIn URL</label
-                >
                 <input
-                  type="url"
+                  type="tel"
                   class="form-control"
-                  id="contributorLinkedIn"
+                  id="contributorPhone"
+                  placeholder="+94 123 456 789"
                 />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="contributorExpertise" class="form-label"
-                >Expertise (comma-separated)</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="contributorExpertise"
-                placeholder="e.g., Machine Learning, Data Analysis, Neurology"
-              />
-            </div>
-
-            <div class="form-group">
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="contributorActive"
-                />
-                <label class="form-check-label" for="contributorActive"
-                  >Active Status</label
-                >
               </div>
             </div>
 
@@ -604,16 +660,9 @@
                 <select id="userRole" class="form-control" required>
                   <option value="">Select Role</option>
                   <option value="Admin">Admin</option>
-                  <option value="Editor">Publisher</option>
-                  <option value="Viewer">User</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="userStatus" class="form-label">Status</label>
-                <select id="userStatus" class="form-control" required>
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
+                  <option value="Publisher">Publisher</option>
+                  <option value="Student">Studnet</option>
+                  <option value="Lecture">Lecture</option>
                 </select>
               </div>
             </div>
@@ -645,35 +694,75 @@
       </div>
     </div>
 
-    <!-- Add/Edit Event Modal -->
-    <div class="modal" id="eventModal">
+    <!-- Add/Edit Publication Modal -->
+    <div class="modal" id="publicationModal">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 id="eventModalTitle">Add Event</h3>
-          <button class="modal-close" onclick="closeModal('eventModal')">
+          <h3 id="publicationModalTitle">Add Publication</h3>
+          <button class="modal-close" onclick="closeModal('publicationModal')">
             &times;
           </button>
         </div>
-        <div class="modal-body">
-          <form id="eventForm">
-            <input type="hidden" id="eventId" />
 
-            <div class="form-group">
-              <label for="eventTitle" class="form-label">Title</label>
-              <input
-                type="text"
-                id="eventTitle"
-                class="form-control"
-                required
-              />
+        <div class="modal-body">
+          <form id="publicationForm">
+            <input type="hidden" id="publicationId" />
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="publicationTitle" class="form-label">Title</label>
+                <input
+                  type="text"
+                  id="publicationTitle"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="publicationAuthors" class="form-label"
+                  >Authors</label
+                >
+                <select
+                  id="publicationAuthors"
+                  class="form-control"
+                  multiple="multiple"
+                  required
+                ></select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="publicationJournal" class="form-label"
+                  >Journal / Venue</label
+                >
+                <input
+                  type="text"
+                  id="publicationJournal"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="publicationYear" class="form-label">Year</label>
+                <input
+                  type="number"
+                  id="publicationYear"
+                  class="form-control"
+                  placeholder="e.g. 2024"
+                  required
+                />
+              </div>
             </div>
 
             <div class="form-group">
-              <label for="eventDescription" class="form-label"
+              <label for="publicationDescription" class="form-label"
                 >Description</label
               >
               <textarea
-                id="eventDescription"
+                id="publicationDescription"
                 class="form-control"
                 rows="3"
                 required
@@ -681,100 +770,26 @@
             </div>
 
             <div class="form-group">
-              <label for="eventType" class="form-label">Event Type</label>
-              <select id="eventType" class="form-control" required>
-                <option value="">Select Type</option>
-                <option value="Conference">Conference</option>
-                <option value="Workshop">Workshop</option>
-                <option value="Seminar">Seminar</option>
-                <option value="Webinar">Webinar</option>
-                <option value="Training">Training</option>
-                <option value="Networking">Networking</option>
-                <option value="Research Presentation">
-                  Research Presentation
-                </option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="eventStartDate" class="form-label"
-                  >Start Date</label
-                >
-                <input
-                  type="date"
-                  id="eventStartDate"
-                  class="form-control"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="eventEndDate" class="form-label">End Date</label>
-                <input
-                  type="date"
-                  id="eventEndDate"
-                  class="form-control"
-                  required
-                />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="eventStartTime" class="form-label"
-                  >Start Time</label
-                >
-                <input
-                  type="time"
-                  id="eventStartTime"
-                  class="form-control"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="eventEndTime" class="form-label">End Time</label>
-                <input
-                  type="time"
-                  id="eventEndTime"
-                  class="form-control"
-                  required
-                />
-              </div>
-            </div>
-
-            <h4 style="margin-top: 20px">Location Details</h4>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="venue" class="form-label">Venue</label>
-                <input type="text" id="venue" class="form-control" required />
-              </div>
-              <div class="form-group">
-                <label for="address" class="form-label">Address</label>
-                <input type="text" id="address" class="form-control" required />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="city" class="form-label">City</label>
-                <input type="text" id="city" class="form-control" required />
-              </div>
-              <div class="form-group">
-                <label for="country" class="form-label">Country</label>
-                <input type="text" id="country" class="form-control" required />
-              </div>
+              <label for="publicationLink" class="form-label"
+                >Publication Link (optional)</label
+              >
+              <input
+                type="url"
+                id="publicationLink"
+                class="form-control"
+                placeholder="https://example.com"
+              />
             </div>
 
             <div class="form-group">
-              <label for="eventOrganizer" class="form-label"
-                >Organizer ID</label
+              <label for="publicationDoi" class="form-label"
+                >DOI (optional)</label
               >
               <input
                 type="text"
-                id="eventOrganizer"
+                id="publicationDoi"
                 class="form-control"
-                required
+                placeholder="e.g. 10.1109/5.771073"
               />
             </div>
 
@@ -782,12 +797,16 @@
               <button
                 type="button"
                 class="btn"
-                onclick="closeModal('eventModal')"
+                onclick="closeModal('publicationModal')"
               >
                 Cancel
               </button>
-              <button type="submit" class="btn btn-primary" id="eventSubmitBtn">
-                Create Event
+              <button
+                type="submit"
+                class="btn btn-primary"
+                id="publicationSubmitBtn"
+              >
+                Create Publication
               </button>
             </div>
           </form>
@@ -795,7 +814,102 @@
       </div>
     </div>
 
-    <!-- Project Modal -->
+    <!-- Add/Edit Blog Modal -->
+    <div class="modal" id="blogModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="blogModalTitle">Add Blog</h3>
+          <button class="modal-close" onclick="closeModal('blogModal')">
+            &times;
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form id="blogForm">
+            <input type="hidden" id="blogId" />
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="blogTitle" class="form-label">Title</label>
+                <input
+                  type="text"
+                  id="blogTitle"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="blogAuthor" class="form-label">Author</label>
+                <input
+                  type="text"
+                  id="blogAuthor"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="blogDate" class="form-label">Date</label>
+                <input type="date" id="blogDate" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="blogReadTime" class="form-label">Read Time</label>
+                <input
+                  type="text"
+                  id="blogReadTime"
+                  class="form-control"
+                  placeholder="e.g. 5 min"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="blogDescription" class="form-label"
+                >Description</label
+              >
+              <textarea
+                id="blogDescription"
+                class="form-control"
+                rows="4"
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="blogLink" class="form-label"
+                >Blog Link (optional)</label
+              >
+              <input
+                type="url"
+                id="blogLink"
+                class="form-control"
+                placeholder="https://example.com/blog"
+              />
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn"
+                onclick="closeModal('blogModal')"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary" id="blogSubmitBtn">
+                Create Blog
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add/Edit Project Modal -->
     <div class="modal" id="projectModal">
       <div class="modal-content">
         <div class="modal-header">
@@ -806,141 +920,113 @@
         </div>
 
         <div class="modal-body">
-          <form id="projectForm">
+          <form id="projectForm" enctype="multipart/form-data">
             <input type="hidden" id="projectId" />
 
             <div class="form-group">
               <label for="projectTitle" class="form-label">Title</label>
               <input
                 type="text"
-                class="form-control"
                 id="projectTitle"
-                placeholder="Project Title"
+                class="form-control"
                 required
               />
             </div>
 
             <div class="form-group">
-              <label for="projectShortDesc" class="form-label"
-                >Short Description</label
-              >
-              <textarea
-                class="form-control"
-                id="projectShortDesc"
-                rows="2"
-                maxlength="300"
-                required
-              ></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="projectDesc" class="form-label">Description</label>
-              <textarea
-                class="form-control"
-                id="projectDesc"
-                rows="4"
-                maxlength="2000"
-                required
-              ></textarea>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="projectCategory" class="form-label">Category</label>
-                <select class="form-control" id="projectCategory" required>
-                  <option value="">Select Category</option>
-                  <option value="Neuromorphic Computing">
-                    Neuromorphic Computing
-                  </option>
-                  <option value="Machine Learning">Machine Learning</option>
-                  <option value="Artificial Intelligence">
-                    Artificial Intelligence
-                  </option>
-                  <option value="Hardware Development">
-                    Hardware Development
-                  </option>
-                  <option value="Software Development">
-                    Software Development
-                  </option>
-                  <option value="Research">Research</option>
-                  <option value="Collaboration">Collaboration</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="projectStatus" class="form-label">Status</label>
-                <select class="form-control" id="projectStatus" required>
-                  <option value="planning">Planning</option>
-                  <option value="active">Active</option>
-                  <option value="completed">Completed</option>
-                  <option value="on-hold">On Hold</option>
-                  <option value="cancelled">Cancelled</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="projectPriority" class="form-label">Priority</label>
-                <select class="form-control" id="projectPriority">
-                  <option value="low">Low</option>
-                  <option value="medium" selected>Medium</option>
-                  <option value="high">High</option>
-                  <option value="critical">Critical</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="projectTeamLead" class="form-label"
-                  >Team Lead</label
-                >
-                <select
-                  class="form-control"
-                  id="projectTeamLead"
-                  required
-                ></select>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="projectStartDate" class="form-label"
-                  >Start Date</label
-                >
-                <input
-                  type="date"
-                  class="form-control"
-                  id="projectStartDate"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="projectEndDate" class="form-label">End Date</label>
-                <input type="date" class="form-control" id="projectEndDate" />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="projectBudget" class="form-label">Budget (USD)</label>
-              <input
-                type="number"
-                class="form-control"
-                id="projectBudget"
-                min="0"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="projectFunding" class="form-label"
-                >Funding Source</label
+              <label for="projectTags" class="form-label"
+                >Tags (comma-separated)</label
               >
               <input
                 type="text"
+                id="projectTags"
                 class="form-control"
-                id="projectFunding"
-                maxlength="200"
+                placeholder="e.g., Neuromorphic, AI, VLSI"
               />
+            </div>
+
+            <div class="form-group">
+              <label for="projectDetails" class="form-label"
+                >Short Details</label
+              >
+              <textarea
+                id="projectDetails"
+                class="form-control"
+                rows="3"
+                maxlength="1000"
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="projectOverview" class="form-label">Overview</label>
+              <textarea
+                id="projectOverview"
+                class="form-control"
+                rows="4"
+                maxlength="5000"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="projectObjectives" class="form-label"
+                >Objectives (one per line)</label
+              >
+              <textarea
+                id="projectObjectives"
+                class="form-control"
+                rows="3"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="projectOutcomes" class="form-label"
+                >Outcomes (one per line)</label
+              >
+              <textarea
+                id="projectOutcomes"
+                class="form-control"
+                rows="3"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="projectTechnicalApproach" class="form-label"
+                >Technical Approach</label
+              >
+              <textarea
+                id="projectTechnicalApproach"
+                class="form-control"
+                rows="4"
+                maxlength="5000"
+              ></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="projectStatus" class="form-label">Status</label>
+                <select id="projectStatus" class="form-control">
+                  <option value="Planning">Planning</option>
+                  <option value="Active">Active</option>
+                  <option value="Completed">Completed</option>
+                  <option value="On-Hold">On-Hold</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="projectDuration" class="form-label">Duration</label>
+                <input
+                  type="text"
+                  id="projectDuration"
+                  class="form-control"
+                  placeholder="e.g., 6 months"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="projectFunding" class="form-label">Funding</label>
+              <input type="text" id="projectFunding" class="form-control" />
             </div>
 
             <div class="form-group">
@@ -949,46 +1035,97 @@
               >
               <input
                 type="text"
-                class="form-control"
                 id="projectTechnologies"
-                placeholder="e.g., Python, Verilog, TensorFlow"
+                class="form-control"
               />
             </div>
 
             <div class="form-group">
-              <label for="projectProgress" class="form-label"
-                >Progress (%)</label
+              <label for="projectContributors" class="form-label"
+                >Contributors</label
               >
-              <input
-                type="number"
+              <select
+                id="projectContributors"
                 class="form-control"
-                id="projectProgress"
-                min="0"
-                max="100"
-                value="0"
-              />
+                multiple
+              ></select>
             </div>
 
-            <div class="form-check">
-              <input
-                type="checkbox"
-                id="projectPublic"
-                class="form-check-input"
-              />
-              <label class="form-check-label" for="projectPublic"
-                >Public Project</label
+            <div class="form-group">
+              <label for="projectRepositories" class="form-label"
+                >Repositories</label
               >
+              <textarea
+                id="projectRepositories"
+                class="form-control"
+                rows="3"
+                placeholder="title | description | link | type (GitHub/Web Page/Documentation) per line"
+              ></textarea>
             </div>
 
-            <div class="form-check">
-              <input
-                type="checkbox"
-                id="projectFeatured"
-                class="form-check-input"
-              />
-              <label class="form-check-label" for="projectFeatured"
-                >Featured</label
+            <div class="form-group">
+              <label for="projectLink" class="form-label">Project Link</label>
+              <input type="text" id="projectLink" class="form-control" />
+            </div>
+
+            <div class="form-group">
+              <label for="projectImage" class="form-label"
+                >Upload Project Image (optional)</label
               >
+              <div class="image-upload-wrapper-project">
+                <input
+                  type="file"
+                  id="projectImage"
+                  class="form-control"
+                  accept="image/*"
+                  style="display: none"
+                />
+                <div
+                  class="image-upload-area-project"
+                  id="uploadAreaProject"
+                  onclick="document.getElementById('projectImage').click()"
+                >
+                  <div
+                    class="uploadProject-placeholder"
+                    id="uploadPlaceholderProject"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
+                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                      <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                    <span>Click to Upload Project Image</span>
+                    <small>PNG, JPG, GIF or WEBP (max. 5MB)</small>
+                  </div>
+                  <img
+                    id="imagePreview-project"
+                    src=""
+                    alt="Preview"
+                    style="display: none"
+                  />
+                </div>
+                <button
+                  type="button"
+                  class="remove-image"
+                  id="removeProjectImageBtn"
+                  onclick="removeProjectImage(event)"
+                  style="display: none"
+                >
+                  ×
+                </button>
+              </div>
             </div>
           </form>
         </div>
@@ -1001,7 +1138,12 @@
           >
             Cancel
           </button>
-          <button type="submit" class="btn btn-primary" form="projectForm" id="projectSubmitBtn">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            form="projectForm"
+            id="projectSubmitBtn"
+          >
             Save Project
           </button>
         </div>
@@ -1009,7 +1151,7 @@
     </div>
 
     <!--Add/Edit News Modal-->
-    <div id="newsModal" class="modal">
+    <div class="modal" id="newsModal">
       <div class="modal-content">
         <div class="modal-header">
           <h3 id="newsModalTitle">Add News</h3>
@@ -1017,59 +1159,136 @@
             &times;
           </button>
         </div>
+
         <div class="modal-body">
           <form id="newsForm">
             <input type="hidden" id="newsId" />
 
             <div class="form-group">
-              <label for="newsTitle" class="form-label">Title</label>
-              <input type="text" id="newsTitle" class="form-control" required />
-            </div>
-
-            <div class="form-group">
-              <label for="newsSummary" class="form-label">Summary</label>
-              <textarea
-                id="newsSummary"
-                class="form-control"
-                rows="2"
-                required
-              ></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="newsContent" class="form-label">Content</label>
-              <textarea
-                id="newsContent"
-                class="form-control"
-                rows="5"
-                required
-              ></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="newsAuthor" class="form-label">Author ID</label>
+              <label for="newsTitle" class="form-label">News Title</label>
               <input
                 type="text"
-                id="newsAuthor"
+                id="newsTitle"
                 class="form-control"
+                placeholder="Enter an engaging news title..."
                 required
               />
             </div>
 
             <div class="form-group">
-              <label for="newsCategory" class="form-label">Category</label>
-              <select id="newsCategory" class="form-control" required>
-                <option value="">Select Category</option>
-                <option value="Research Breakthrough">
-                  Research Breakthrough
-                </option>
-                <option value="Publication">Publication</option>
-                <option value="Awards">Awards</option>
-                <option value="Collaboration">Collaboration</option>
-                <option value="Technology">Technology</option>
-                <option value="Conference">Conference</option>
-                <option value="General">General</option>
-              </select>
+              <label for="newsAuthor" class="form-label">Author</label>
+              <input
+                type="text"
+                id="newsAuthor"
+                class="form-control"
+                placeholder="Auhtor name"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="newsDate" class="form-label">PublicationDate</label>
+              <input type="date" id="newsDate" class="form-control" />
+            </div>
+
+            <div class="form-group">
+              <label for="newsBrief" class="form-label">Brief</label>
+              <textarea
+                id="newsBrief"
+                class="form-control"
+                rows="3"
+                placeholder="Write a short summary (150-200 characters)..."
+                maxlength="200"
+                required
+              ></textarea>
+              <div class="char-counter">
+                <span id="briefCounter">0</span>/200 characters
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="newsFullContent" class="form-label"
+                >Full Content</label
+              >
+              <textarea
+                id="newsFullContent"
+                class="form-control"
+                rows="6"
+                placeholder="write the complete news article..."
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="newsImage" class="form-label"
+                >Upload Image (optional)</label
+              >
+              <div class="image-upload-wrapper-news">
+                <input
+                  type="file"
+                  id="newsImage"
+                  class="form-control"
+                  accept="image/*"
+                  style="display: none"
+                />
+                <div
+                  class="image-upload-area-news"
+                  id="uploadAreaNews"
+                  onclick="document.getElementById('newsImage').click()"
+                >
+                  <div
+                    class="uploadNews-placeholder"
+                    id="uploadPlaceholderNews"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
+                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                      <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                    <span>Click to Upload Image</span>
+                    <small>PNG, JPG, GIF or WEBP (max. 5MB)</small>
+                  </div>
+                  <img
+                    id="imagePreview-news"
+                    src=""
+                    alt="Preview"
+                    style="display: none"
+                  />
+                </div>
+                <button
+                  type="button"
+                  class="remove-image"
+                  id="removeImageBtn"
+                  onclick="removeImage(event)"
+                  style="display: none"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="newsLink" class="form-label"
+                >External Link (optional)</label
+              >
+              <input
+                type="url"
+                id="newsLink"
+                class="form-control"
+                placeholder="https://example.com"
+              />
             </div>
 
             <div class="modal-footer">
@@ -1081,7 +1300,7 @@
                 Cancel
               </button>
               <button type="submit" class="btn btn-primary" id="newsSubmitBtn">
-                Add News
+                Create News
               </button>
             </div>
           </form>
@@ -1093,8 +1312,9 @@
     <script src="js/DOM.js"></script>
     <script src="js/general_function.js"></script>
     <script src="js/projects.js"></script>
-    <script src="js/events.js"></script>
+    <script src="js/publication.js"></script>
     <script src="js/news.js"></script>
+    <script src="js/blog.js"></script>
     <script src="js/contributors.js"></script>
     <script src="js/main.js"></script>
     <script src="js/login.js"></script>

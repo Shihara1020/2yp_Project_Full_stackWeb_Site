@@ -14,7 +14,7 @@ const router = express.Router();
 
 // All routes require admin authentication
 router.use(protect);
-router.use(authorize('admin'));
+router.use(authorize('Admin'));
 
 router
     .route('/dashboard')

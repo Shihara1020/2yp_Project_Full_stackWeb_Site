@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./project.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/general.css" />
+    <link rel="stylesheet" href="./query.css" />
+    <link rel="stylesheet" href="../css/query.css" />
+    <link href="css/query.css" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="header">
+      <a href="#">
+        <img src="./img/logo.png" alt="" class="escal" />
+      </a>
+      <nav class="mian-nav">
+        <ul class="main-nav-list">
+          <li>
+            <a class="main-nav-link" href="#">How it works</a>
+          </li>
+          <li>
+            <a class="main-nav-link" href="#">How it works</a>
+          </li>
+          <li>
+            <a class="main-nav-link" href="#">Testimonials</a>
+          </li>
+          <li>
+            <a class="main-nav-link" href="#">Pricing</a>
+          </li>
+          <li>
+            <a class="main-nav-link nav-cta" href="#">Try for free</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="project-header">
+        <div class="project-container">
+          <div class="project-container-text">
+            <a href="../index.html" class="back-to-project"
+              ><span>&larr;</span> Back to projects</a
+            >
+            <h1 class="project-header-name" id="project-title">Loading ..</h1>
+            <p class="project-header-details" id="project-subtitle">Loading .....</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="project-details-section">
+        <div class="container grid-of-project">
+          <div class="main-details" id="project-main-details">
+            <!-- Overview, Objectives, Key Outcomes, Technical Approach will be injected here -->
+          </div>
+
+          <div class="sub-details" id="project-side-details">
+            <!-- Status, Duration, Funding, Technologies -->
+          </div>
+        </div>
+      </section>
+
+      <section class="section-contributes">
+        <div class="container">
+          <h2 class="project-subtopics contribute-header"> Project Contribute </h2> 
+        </div>
+
+        <div class="container grid grid--5--cols" id="project-contributors">
+            <!-- Contributors dynamically loaded -->
+        </div>
+        </div>
+      </section>
+
+      <section class="section-github">
+        <div class="container">
+          <h2 class="project-subtopics contribute-header">GitHub Repositories</h2> 
+          <div class="git-repo-grid" id="project-github">
+            <!-- GitHub repos dynamically loaded -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="footer-1">
+          <a href="#" class="footer-logo">
+            <img src="img/logo.png" alt="" class="escal" />
+          </a>
+
+          <p class="footer-desc">
+            Advancing the frontiers of neural interface technology through
+            innovative research and collaboration
+          </p>
+
+          <ul class="social-links">
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-instagram"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-facebook"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-twitter"></ion-icon
+              ></a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="address-col">
+          <p class="footer-heading">Contact us</p>
+          <address class="contacts">
+            <p class="address">peradeniya,university of peradeniya</p>
+            <p>
+              <a class="footer-link" href="tel:415-201-6370">1234567</a><br />
+              <a class="footer-link" href="mailto:hello@omnifood.com"
+                >nero@d.com</a
+              >
+            </p>
+          </address>
+        </div>
+
+        <nav class="nav-col">
+          <p class="footer-heading">Quick Links</p>
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">Home</a></li>
+            <li><a class="footer-link" href="#">About</a></li>
+            <li><a class="footer-link" href="#">News</a></li>
+            <li><a class="footer-link" href="#">Projects</a></li>
+          </ul>
+        </nav>
+
+        <nav class="nav-col">
+          <p class="footer-heading">Account</p>
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">Create account</a></li>
+            <li><a class="footer-link" href="#">Sign in</a></li>
+            <li><a class="footer-link" href="#">iOS app</a></li>
+            <li><a class="footer-link" href="#">Android app</a></li>
+          </ul>
+        </nav>
+
+        <nav class="nav-col">
+          <p class="footer-heading">Rearch Area</p>
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">Neural Interfaces</a></li>
+            <li>
+              <a class="footer-link" href="#">Brain-Computer Interfaces</a>
+            </li>
+            <li>
+              <a class="footer-link" href="#">Neural Signal Processing</a>
+            </li>
+            <li><a class="footer-link" href="#">Neuroplasticity</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="footer-line">
+        <p class="copyright">
+          Copyright &copy; 2027 by pera com, Inc. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+
+  <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+  <script>
+    (async function () {
+      const projectId = new URLSearchParams(window.location.search).get("id");
+
+      if (!projectId) return;
+
+      async function fetchJSON(path) {
+        const res = await fetch(`http://localhost:8000/api/v1/${path}`);
+        if (!res.ok) throw new Error(res.statusText);
+        return res.json();
+      }
+
+      try {
+        const res = await fetchJSON(`projects/${projectId}`);
+        const project = res.data;
+
+        // Project Header
+        document.querySelector("#project-title").textContent = project.title;
+        document.querySelector("#project-subtitle").textContent = project.details;
+
+        // Main Details
+        const mainContainer = document.querySelector("#project-main-details");
+        mainContainer.innerHTML = `
+              <div class="project-overview">
+                <h2 class="project-subtopics">Project overview</h2>
+                <p class="project-decs">${project.overview}</p>
+              </div>
+
+              <div class="Objectives">
+                <h2 class="project-subtopics">Objectives</h2>
+                <ul class="project-list">
+                  ${project.objectives
+                    .map(
+                      (obj) =>
+                        `<li><ion-icon name="send" class="arrow-icon"></ion-icon><span>${obj}</span></li>`
+                    )
+                    .join("")}
+                </ul>
+              </div>
+
+              <div class="Objectives">
+                <h2 class="project-subtopics">Key Outcomes</h2>
+                <ul class="project-list">
+                  ${project.outcomes
+                    .map(
+                      (out) =>
+                        `<li><ion-icon name="send" class="arrow-icon"></ion-icon><span>${out}</span></li>`
+                    )
+                    .join("")}
+                </ul>
+              </div>
+
+              <div class="Objectives">
+                <h2 class="project-subtopics">Technical Approach</h2>
+                <p class="project-decs">${project.technicalApproach}</p>
+              </div>
+            `;
+
+        // Side Details
+        const sideContainer = document.querySelector("#project-side-details");
+        sideContainer.innerHTML = `
+              <div class="project-side-card"><h3>Project Status</h3><p>${
+                project.status
+              }</p></div>
+              <div class="project-side-card"><h3>Duration</h3><p>${
+                project.duration
+              }</p></div>
+              <div class="project-side-card"><h3>Funding</h3><p>${
+                project.funding
+              }</p></div>
+              <div class="project-side-card"><h3>Technologies</h3><ul class="tech-list">${project.technologies.map((t) => `<li>${t}</li>`).join("")}</ul></div>
+            `;
+
+        // Contributors
+
+        const contribContainer = document.querySelector("#project-contributors");
+        contribContainer.innerHTML = project.projectContributors.map((c) => `
+              <div class="contributor">
+                <img src="${c.image}" class="contributor-img" />
+                <div class="contributor-text">
+                  <p class="contributor-name">${c.name}</p>
+                  <p class="contributor-batch">${c.position}</p>
+                </div>
+              </div>
+            `).join("");
+
+        // GitHub
+        const githubContainer = document.querySelector("#project-github");
+        githubContainer.innerHTML = project.repositories
+          .map((g) => {
+            const imgSrc = g.type.toLowerCase() === "github" ? "./img/default.jpg" : "./img/icon_page.png";
+            return `
+              <div class="git-hub-repo">
+                <img src="${imgSrc}" alt="${g.type} Repo" class="github-img" />
+                <div class="repo-content">
+                  <h4 class="repo-title">${g.title}</h4>
+                  <p class="repo-desc">${g.description}</p>
+                  <a href="${g.link}" class="github-link" target="_blank">View on ${g.type} <span>&rarr;</span></a>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+
+
+      } catch (e) {
+        console.error("Failed to load project", e);
+      }
+    })();
+  </script>
+</html>

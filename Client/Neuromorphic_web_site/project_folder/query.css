@@ -1,0 +1,95 @@
+/* =========================
+   RESPONSIVE QUERIES
+========================= */
+
+/* ---- Large Tablets (≤ 1200px) ---- */
+@media (max-width: 1200px) {
+  html {
+    font-size: 58%;
+  }
+
+  .project-container-text {
+    width: 70%;
+  }
+
+  .grid-of-project {
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+  }
+}
+
+/* ---- Tablets (≤ 768px) ---- */
+@media (max-width: 768px) {
+  html {
+    font-size: 55%;
+  }
+
+  .project-header {
+    height: 45vh;
+    text-align: center;
+  }
+
+  .project-container-text {
+    width: 100%;
+  }
+
+  .grid-of-project {
+    grid-template-columns: 1fr;
+  }
+
+  .tech-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .git-hub-repo {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .github-img {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .repo-content {
+    align-items: center;
+  }
+}
+
+/* ---- Mobiles (≤ 480px) ---- */
+@media (max-width: 480px) {
+  html {
+    font-size: 50%;
+  }
+
+  .project-header {
+    height: 50vh;
+    padding: 2rem;
+  }
+
+  .project-header-name {
+    font-size: 3rem;
+  }
+
+  .project-header-details {
+    font-size: 1.6rem;
+  }
+
+  .project-subtopics {
+    font-size: 2.4rem;
+  }
+
+  .project-decs,
+  .project-list li {
+    font-size: 1.6rem;
+  }
+
+  .tech-list {
+    grid-template-columns: 1fr;
+  }
+
+  .contributor-img {
+    width: 8rem;
+    height: 8rem;
+  }
+}

@@ -1,8 +1,9 @@
 const User = require('../models/User');
 const Contributor = require('../models/Contributor');
 const News = require('../models/News');
-const Event = require('../models/Event');
+const Publication = require('../models/Publication');
 const Project = require('../models/Project');
+const Blog=require('../models/Blog');
 const SystemSettings = require('../models/SystemSettings');
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
@@ -17,80 +18,32 @@ exports.getDashboardStats=asyncHandler(async(req,res,next)=>{
     const totalUsers=await User.countDocuments();
     const totalContributors=await Contributor.countDocuments();
     const totalNews=await News.countDocuments();
-    const totalEvents=await Event.countDocuments();
+    const totalPublications=await Publication.countDocuments();
     const totalProjects=await Project.countDocuments();
-
-    // Get active/published counts
-    const activeContributors=await Contributor.countDocuments({isActive:true});
-    const publishedNews = await News.countDocuments({ isPublished: true });
-    const publishedEvents = await Event.countDocuments({ isPublished: true });
-    const activeProjects = await Project.countDocuments({ status: 'active' });
+    const totalBlogs=await Blog.countDocuments();
 
     // Get recent activities
-    const recentNews=await News.find().sort('-createdAt').limit(5).populate('author','name');
-    const recentEvents = await Event.find().sort('-createdAt').limit(5).populate('organizer', 'name');
-    const recentProjects = await Project.find().sort('-createdAt').limit(5).populate('teamLead', 'name');
+    const recentNews = await News.find().sort('-date').limit(5);
+    const recentPublications = await Publication.find().sort('-year').limit(5);
+    const recentProjects = await Project.find().sort('-createdAt').limit(5);
+    const recentBlogs = await Blog.find().sort('-date').limit(5);
 
-    // Get upcoming events
-    const upcomingEvents = await Event.find({
-        startDate: { $gte: new Date() },
-        isPublished: true
-    }).sort('startDate').limit(5).populate('organizer', 'name');
-
-
-    // Get project status distribution
-    const projectsByStatus = await Project.aggregate([
-        {
-            $group: {
-                _id: '$status',
-                count: { $sum: 1 }
-            }
-        }
-    ]);
-
-
-    // Get news by category
-    const newsByCategory = await News.aggregate([
-        {
-            $group: {
-                _id: '$category',
-                count: { $sum: 1 }
-            }
-        }
-    ]);
-
-    // Get contributors by department
-    const contributorsByDepartment = await Contributor.aggregate([
-        {
-            $group: {
-                _id: '$department',
-                count: { $sum: 1 }
-            }
-        }
-    ]);
 
     const dashboardData = {
         stats: {
             totalUsers,
             totalContributors,
             totalNews,
-            totalEvents,
+            totalPublications,
             totalProjects,
-            activeContributors,
-            publishedNews,
-            publishedEvents,
-            activeProjects
+            totalBlogs
         },
         recentActivities: {
             news: recentNews,
-            events: recentEvents,
-            projects: recentProjects
-        },
-        upcomingEvents,
-        charts: {
-            projectsByStatus,
-            newsByCategory,
-            contributorsByDepartment
+            publications: recentPublications,
+            projects: recentProjects,
+            blogs: recentBlogs
+            
         }
     };
 
@@ -122,9 +75,9 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
   const { name, email, role } = req.body;
 
   // Validate role
-  if (!['User', 'Publisher', 'Admin'].includes(role)) {
+  if (!['Student', 'Lecture', 'Admin','Publisher'].includes(role)) {
     return next(
-      new ErrorResponse('Invalid role. Must be User, Publisher, or Admin', 400)
+      new ErrorResponse('Invalid role. Must be Student, Lecture, or Admin', 400)
     );
   }
 

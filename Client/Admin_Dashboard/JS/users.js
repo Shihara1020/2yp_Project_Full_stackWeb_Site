@@ -16,11 +16,11 @@ function updateUsersTable(users) {
           <td>${createdDate}</td>
           <td>
             <div class="action-buttons">
-              <button class="btn btn-primary btn-sm" onclick='openUserModal(${JSON.stringify(user)})'>
-                <i class="fas fa-edit"></i>
+              <button class="table-btn btn-edit" onclick='openUserModal(${JSON.stringify(user)})'>
+                <img src="./img_dashbord/table/edit.svg" class="edit-icon"/>
               </button>
-              <button class="btn btn-danger btn-sm" onclick="deleteItem('${user._id}','admin/users',updateUsersTable)">
-                <i class="fas fa-trash"></i>
+              <button class="table-btn btn-delete" onclick="deleteItem('${user._id}','admin/users',updateUsersTable)">
+                <img src="./img_dashbord/table/delete.svg" class="delete-icon"/>
               </button>
             </div>
           </td>

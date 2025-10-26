@@ -30,8 +30,8 @@ function loadSectionData(section) {
         case "news":
             loadSection('news',updateNewsTable);
             break;
-        case "events":
-            loadSection('events',updateEventsTable);
+        case "publication":
+            loadSection('publications',updatePublicationTable);
             break;
         case "projects":
             loadSection('projects',updateProjectsTable);
@@ -39,5 +39,7 @@ function loadSectionData(section) {
         case "users":
             loadSection('admin/users',updateUsersTable);
             break;
+        case "blogs":
+            loadSection("blogs",updateBlogsTable);
     }
 }

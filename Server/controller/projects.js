@@ -1,254 +1,230 @@
-const Projects=require('../models/Project');
-const ErrorResponse=require('../utils/errorResponse');
-const asyncHandler=require('../middleware/async');
+const fs = require("fs");
+const path = require("path");
+const Projects = require("../models/Project");
+const ErrorResponse = require("../utils/errorResponse");
+const asyncHandler = require("../middleware/async");
 
 // @desc  Get all projects
 // @route GET /api/v1/projects
 // @access Public
+exports.getProjects = asyncHandler(async (req, res, next) => {
+  const projects = await Projects.find().populate({
+    path: "projectContributors",
+    select: "name position image",
+  });
 
-exports.getProjects=asyncHandler(async(req,res,next)=>{
-    const projects= await Projects.find();
-    res.status(200).json({
-        success:true,
-        data:projects
-    })
-})
+  res.status(200).json({
+    success: true,
+    data: projects,
+  });
+});
 
-
-
-// @desc   Get single projects
+// @desc   Get single project
 // @route  GET /api/v1/projects/:id
 // @access Public
-exports.getSingleProject=asyncHandler(async(req,res,next)=>{
-    const projects=await Projects.findById(req.params.id);
+exports.getSingleProject = asyncHandler(async (req, res, next) => {
+  const project = await Projects.findById(req.params.id).populate({
+    path: "projectContributors",
+    select: "name position image",
+  });
 
-    if(!projects){
-        return next(new ErrorResponse(`Projects not found with id of ${req.params.id}`,404));
-    }
+  if (!project) {
+    return next(
+      new ErrorResponse(`Project not found with id of ${req.params.id}`, 404)
+    );
+  }
 
-    res.status(200).json({
-        success:true,
-        data:projects
-    });
+  res.status(200).json({
+    success: true,
+    data: project,
+  });
 });
 
-// @esc   Get projects by slug
-// @route GET /api/v1/projects/slug/:slug
+// @desc   Get project by slug
+// @route  GET /api/v1/projects/slug/:slug
 // @access Public
-exports.getProjectsByslug=asyncHandler(async(req,res,next)=>{
+exports.getProjectsBySlug = asyncHandler(async (req, res, next) => {
+  const project = await Projects.findOne({ slug: req.params.slug });
 
-    const projects=await Projects.find({
-        slug:req.params.slug
-    });
+  if (!project) {
+    return next(
+      new ErrorResponse(`Project not found with slug of ${req.params.slug}`, 404)
+    );
+  }
 
-    if(!projects){
-        return next(new ErrorResponse(`Projects not found with slug of ${req.params.slug}`,404));
-    }
+  res.status(200).json({
+    success: true,
+    data: project,
+  });
+});
 
-
-
-    res.status(200).json({
-        success:true,
-        data:projects
-    })
-})
-
-
-// @desc   Create new projects
+// @desc   Create new project
 // @route  POST /api/v1/projects
-// @access Private(Admin only)
-exports.createProjects=asyncHandler(async(req,res,next)=>{
-
-    const projects=await Projects.create(req.body);
-
-    res.status(201).json({
-        success:true,
-        data:projects
-    })
-})
-
-// @desc Update projects
-// @route PUT /api/v1/projects/:id
-// @access Private(Admin only)
-exports.updateProjects=asyncHandler(async(req,res,next)=>{
-
-    const projects=await Projects.findByIdAndUpdate(req.params.id,req.body,{
-        new:true,
-        runValidators:true
-    });
-
-    if(!projects){
-        return next(new ErrorResponse(`Projects not found with id ${req.params.id}`,404))
+// @access Private (Admin only)
+exports.createProjects = asyncHandler(async (req, res, next) => {
+  const {title,tags,details,link,overview,objectives,outcomes,technicalApproach,duration,funding,projectContributors,repositories} = req.body;
+  
+  // Parse repositories if it's a string
+  if (repositories && typeof repositories === "string") {
+    try {
+      repositories = JSON.parse(repositories);
+    } catch (err) {
+      return next(new ErrorResponse("Invalid repositories JSON", 400));
     }
+  }
 
-    res.status(200).json({
-        success:true,
-        data:projects
-    });
+  let imageUrl=null;
+
+  if (req.file) {
+    imageUrl = `${req.protocol}://${req.get("host")}/uploads/projects/${req.file.filename}`;
+  }
+
+  const project = await Projects.create({
+    title,
+    tags,
+    details,
+    link,
+    overview,
+    objectives,
+    outcomes,
+    technicalApproach,
+    duration,
+    funding,
+    projectContributors,
+    repositories,
+    image:imageUrl || `${req.protocol}://${req.get("host")}/uploads/projects/projects.jpg`,
+  });
+
+  res.status(201).json({
+    success: true,
+    data: project,
+  });
 });
 
 
-// @desc Delete projects
-// @route DELETE /api/v1/projects/:id
+// @desc   Update project
+// @route  PUT /api/v1/projects/:id
 // @access Private (Admin only)
-exports.deleteProjects=asyncHandler(async(req,res,next)=>{
-    const projects=await Projects.findByIdAndDelete(req.params.id);
+exports.updateProjects = asyncHandler(async (req, res, next) => {
+  let project = await Projects.findById(req.params.id);
+  console.log(req.body);
 
-    if(!projects){
-        return next(new ErrorResponse(`projects not found with id ${req.params.id}`,404))
+  if (!project) {
+    return next(
+      new ErrorResponse(`Project not found with id ${req.params.id}`, 404)
+    );
+  }
+
+  // Parse repositories if it's a string
+  if (req.body.repositories && typeof req.body.repositories === "string") {
+    try {
+      req.body.repositories = JSON.parse(req.body.repositories);
+    } catch (err) {
+      return next(new ErrorResponse("Invalid repositories JSON", 400));
     }
-    res.status(200).json({
-        success:true,
-        data:{}
-    });
-})
+  }
 
+  // Handle image replacement
+  if (req.file) {
+    if (project.image && project.image.includes("/uploads/projects/")) {
+      const oldImageFilename=path.basename(project.image);
+      const oldImagePath = path.join(__dirname, "..", "uploads","projects",oldImageFilename);
+      if (fs.existsSync(oldImagePath)) fs.unlinkSync(oldImagePath);
+    }
+    req.body.image = `${req.protocol}://${req.get("host")}/uploads/projects/${req.file.filename}`;
+  }
 
+  project = await Projects.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
 
-// @desc   GET projects by status
-// @route  GET /api/v1/projects/status/:status
-// @access Public
-exports.getProjectsByStatus=asyncHandler(async(req,res,next)=>{
+  res.status(200).json({
+    success: true,
+    data: project,
+  });
+});
 
-    const projects=await Projects.find({
-        status:req.params.status,
-        isPublic:true
-    }).sort('-createdAt');
+// @desc   Delete project
+// @route  DELETE /api/v1/projects/:id
+// @access Private (Admin only)
+exports.deleteProjects = asyncHandler(async (req, res, next) => {
+  const project = await Projects.findById(req.params.id);
 
-    res.status(200).json({
-        success:true,
-        count:projects.length,
-        data:projects
-    })
-})
+  if (!project) {
+    return next(
+      new ErrorResponse(`Project not found with id ${req.params.id}`, 404)
+    );
+  }
 
-// @desc   GET projects by feature
-// @route  GET /api/v1/projects/featured
-// @access Public
-exports.getFeaturedProjects=asyncHandler(async(req,res,next)=>{
+  // Delete image if exists
+  if (project.image && project.image.startsWith("/uploads")) {
+    const imagePath = path.join(__dirname, "..", project.image);
+    if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath);
+  }
 
-    const projects=await Projects.find({
-        isFeatured:true,
-        isPublic:true
-    }).sort('-createdAt');
+  await project.deleteOne();
 
-    res.status(200).json({
-        success:true,
-        count:projects.length,
-        data:projects
-    })
-})
+  res.status(200).json({
+    success: true,
+    data: {},
+  });
+});
 
-// @desc    Add team member to project
+// @desc    Add contributor to project
 // @route   PUT /api/v1/projects/:id/team-members
 // @access  Private (Admin only)
 exports.addTeamMember = asyncHandler(async (req, res, next) => {
-    const project = await Projects.findById(req.params.id);
-
-    const {member,role}=req.body;
-
-    // Check if member is already in the team
-    const exitingMember=project.teamMembers.find(
-        teamMember=>teamMember.member.toString()===member
+  const project = await Projects.findById(req.params.id);
+  if (!project) {
+    return next(
+      new ErrorResponse(`Project not found with id of ${req.params.id}`, 404)
     );
+  }
 
-    if(exitingMember){
-        return next(new ErrorResponse(`Member is already part of this project`,404));
-    }
+  const { contributorId } = req.body; // the ID of the contributor to add
 
-    project.teamMembers.push({
-        member,
-        role,
-        joinDate:Date.now()
-    });
+  // Check if member already exists
+  const existingMember = project.projectContributors.find(
+    (id) => id.toString() === contributorId
+  );
 
-    await project.save();
+  if (existingMember) {
+    return next(new ErrorResponse(`Contributor is already part of this project`, 400));
+  }
 
-    res.status(200).json({
-        success:true,
-        data:project
-    });
+  project.projectContributors.push(contributorId);
+
+  await project.save();
+
+  res.status(200).json({
+    success: true,
+    data: project,
+  });
 });
 
-// @desc    Remove team member from project
-// @route   DELETE /api/v1/projects/:id/team-members/:memberId
+
+// @desc    Remove contributor from project
+// @route   DELETE /api/v1/projects/:id/team-members/:contributorId
 // @access  Private (Admin only)
 exports.removeTeamMember = asyncHandler(async (req, res, next) => {
-    const project = await Projects.findById(req.params.id);
+  const project = await Projects.findById(req.params.id);
 
-    if (!project) {
-        return next(
-            new ErrorResponse(`Project not found with id of ${req.params.id}`, 404)
-        );
-    }
-
-    // Remove team member
-    project.teamMembers = project.teamMembers.filter(
-        teamMember => teamMember.member.toString() !== req.params.memberId
+  if (!project) {
+    return next(
+      new ErrorResponse(`Project not found with id of ${req.params.id}`, 404)
     );
+  }
 
-    await project.save();
+  project.projectContributors = project.projectContributors.filter(
+    (id) => id.toString() !== req.params.contributorId
+  );
 
-    res.status(200).json({
-        success: true,
-        data: project
-    });
+  await project.save();
+
+  res.status(200).json({
+    success: true,
+    data: project,
+  });
 });
-
-// @desc    Add milestone to project
-// @route   PUT /api/v1/projects/:id/milestones
-// @access  Private (Admin only)
-exports.addMilestone = asyncHandler(async (req, res, next) => {
-    const project = await Projects.findById(req.params.id);
-
-    if (!project) {
-        return next(
-            new ErrorResponse(`Project not found with id of ${req.params.id}`, 404)
-        );
-    }
-
-    project.milestones.push(req.body);
-    await project.save();
-
-    res.status(200).json({
-        success: true,
-        data: project
-    });
-});
-
-// @desc    Update milestone
-// @route   PUT /api/v1/projects/:id/milestones/:milestoneId
-// @access  Private (Admin only)
-exports.updateMilestone = asyncHandler(async (req, res, next) => {
-    const project = await Projects.findById(req.params.id);
-
-    if (!project) {
-        return next(
-            new ErrorResponse(`Project not found with id of ${req.params.id}`, 404)
-        );
-    }
-
-    const milestone = project.milestones.id(req.params.milestoneId);
-
-    if (!milestone) {
-        return next(
-            new ErrorResponse(`Milestone not found with id of ${req.params.milestoneId}`, 404)
-        );
-    }
-
-    // Update milestone fields
-    Object.keys(req.body).forEach(key => {
-        milestone[key] = req.body[key];
-    });
-
-    await project.save();
-
-    res.status(200).json({
-        success: true,
-        data: project
-    });
-});
-
-
-
 

@@ -1,48 +1,93 @@
+// Character counter for brief
+const briefTextarea = document.getElementById("newsBrief");
+const briefCounter = document.getElementById("briefCounter");
+
+briefTextarea.addEventListener("input", function () {
+  briefCounter.textContent = this.value.length;
+});
+
+
+// Remove image
+function removeImage(event) {
+  event.stopPropagation(); // Prevent triggering the upload click
+
+  const preview = document.getElementById("imagePreview-news");
+  const placeholder = document.getElementById("uploadPlaceholderNews");
+  const uploadArea = document.getElementById("uploadAreaNews");
+  const removeBtn = document.getElementById("removeImageBtn");
+  const fileInput = document.getElementById("newsImage");
+
+  preview.src = "";
+  preview.classList.remove("show");
+  preview.style.display = "none";
+  placeholder.style.display = "flex";
+  uploadArea.classList.remove("has-image");
+  removeBtn.style.display = "none";
+  fileInput.value = "";
+}
+
+
 // News functions
-function updateNewsTable(sampleData) {
+function updateNewsTable(newsData) {
   const tableBody = document.querySelector("#newsTable tbody");
   let html = "";
 
-  if (sampleData.length > 0) {
-    sampleData.forEach((news) => {
-      const statusClass =
-        news.status === "Published" ? "badge-success" : "badge-warning";
+  if (newsData.length > 0) {
+    newsData.forEach((news) => {
+      const date = new Date(news.date).toLocaleDateString();
+      const imageSrc = news.image ? news.image : "./uploads/news.jpg";
       html += `
             <tr>
+                <td><img src="${imageSrc}" alt="News Image" class="news-thumb" /></td>
                 <td>${news.title}</td>
                 <td>${news.author}</td>
-                <td>${news.category}</td>
-                <td><span class="badge ${statusClass}">${news.status}</span></td>
-                <td>${news.date}</td>
+                <td>${date}</td>
+                <td>${news.brief}</td>
+                <td>${
+                  news.link && news.link !== "#"
+                    ? `<a href="${news.link}" target="_blank">View</a>`
+                    : "-"
+                }</td>
                 <td>
                     <div class="action-buttons">
-                          <button class="btn btn-primary btn-sm" onclick='openNewsModal(${JSON.stringify(news).replace(/'/g, "&apos;")})'>
-                            <i class="fas fa-edit"></i>
+                          <button class="table-btn btn-edit" onclick='openNewsModal(${JSON.stringify(
+                            news
+                          ).replace(/'/g, "&apos;")})'>
+                            <img src="./img_dashbord/table/edit.svg" class="edit-icon"/>
                         </button>
-                        <button class="btn btn-danger btn-sm" onClick="deleteItem('${news._id}','news',updateNewsTable)">
-                            <i class="fas fa-trash"></i>
+                        <button class="table-btn btn-delete" onClick="deleteItem('${
+                          news._id
+                        }','news',updateNewsTable)">
+                            <img src="./img_dashbord/table/delete.svg" class="delete-icon"/>
                         </button>
                     </div>
                 </td>
             </tr>`;
     });
   } else {
-    html = '<tr><td colspan="6" class="text-center">No news found.</td></tr>';
+    html = '<tr><td colspan="7" class="text-center">No news found.</td></tr>';
   }
 
   tableBody.innerHTML = html;
 }
 
-
 //--------------------------------------
 //     Open modal for Add/Edit user
 //--------------------------------------
 function openNewsModal(news = null) {
-  console.log('call');
+  console.log("call");
   const modal = document.getElementById("newsModal");
   const title = document.getElementById("newsModalTitle");
   const form = document.getElementById("newsForm");
   const submitBtn = document.getElementById("newsSubmitBtn");
+  const placeholder = document.getElementById("uploadPlaceholderNews");
+  const uploadArea = document.getElementById("uploadAreaNews");
+  const removeBtn = document.getElementById("removeImageBtn");
+
+  // Rest form first
+  form.reset();
+  document.getElementById("newsId").value = "";
+  const preview = document.getElementById("imagePreview-news");
 
   if (news) {
     //Edit mode
@@ -51,40 +96,108 @@ function openNewsModal(news = null) {
 
     document.getElementById("newsId").value = news._id;
     document.getElementById("newsTitle").value = news.title;
-    document.getElementById("newsSummary").value = news.summary;
-    document.getElementById("newsContent").value = news.content;
     document.getElementById("newsAuthor").value = news.author;
-    document.getElementById("newsCategory").value = news.category;
+    document.getElementById("newsDate").value = news.date
+      ? new Date(news.date).toISOString().split("T")[0]
+      : "";
+    document.getElementById("newsBrief").value = news.brief;
+    document.getElementById("newsFullContent").value = news.fullContent;
+    document.getElementById("newsLink").value = news.link;
+
+    preview.src = news.image ? news.image : "./uploads/news.jpg";
+    preview.style.display = "block";
+    placeholder.style.display = "none";
+    uploadArea.classList.add("has-image");
+    removeBtn.style.display = "block";
+
   } else {
     //Add mode
     title.textContent = "Add News";
     submitBtn.textContent = "Add News";
-    form.reset();
-    document.getElementById("newsId").value = "";
+    preview.src = "./uploads/news.jpg";
+    preview.style.display = "none";
+
+    preview.src = "";
+    preview.style.display = "none";
+    placeholder.style.display = "flex";
+    uploadArea.classList.remove("has-image");
+    removeBtn.style.display = "none";
   }
 
   modal.classList.add("active");
 }
 
-
 document.getElementById("newsForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  const newsId = document.getElementById("newsId").value;
-  const title = document.getElementById("newsTitle").value;
-  const summary = document.getElementById("newsSummary").value;
-  const content = document.getElementById("newsContent").value;
-  const author = document.getElementById("newsAuthor").value;
-  const category = document.getElementById("newsCategory").value;
+    const newsId = document.getElementById("newsId").value;
 
-  const newsData = { title, summary, content, author, category };
+    const newsData = new FormData();
 
-  if (newsId) {
-    // Edit existing news
-    await editItem("news",newsId,newsData,"news",updateNewsTable, "newsModal");
+    newsData.append("title", document.getElementById("newsTitle").value);
+    newsData.append("brief", document.getElementById("newsBrief").value);
+    newsData.append("fullContent",document.getElementById("newsFullContent").value);
+    newsData.append("author", document.getElementById("newsAuthor").value);
+    newsData.append("date", document.getElementById("newsDate").value);
+    newsData.append("link", document.getElementById("newsLink").value);
+
+    const imageFile = document.getElementById("newsImage").files[0];
+    if (imageFile) {
+      newsData.append("image", imageFile);
+    }
+
+    if (newsId) {
+      // Edit existing news
+      await editItemWithImage(
+        "news",
+        "news",
+        newsId,
+        newsData,
+        updateNewsTable,
+        "newsModal"
+      );
+    } else {
+      // Create new news
+      await createItemWithImage(
+        "news",
+        newsData,
+        updateNewsTable,
+        "newsModal",
+        "news"
+      );
+    }
+  });
+
+
+  document.getElementById("newsImage").addEventListener("change", function (e) {
+  const file = e.target.files[0];
+  const preview = document.getElementById("imagePreview-news");
+  const placeholder = document.getElementById("uploadPlaceholderNews");
+  const uploadArea = document.getElementById("uploadAreaNews");
+  const removeBtn = document.getElementById("removeImageBtn");
+
+  if (file) {
+    // Show preview
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = "block";
+    preview.classList.add("show");
+
+    // Hide placeholder
+    placeholder.style.display = "none";
+
+    // Show remove button
+    removeBtn.style.display = "block";
+
+    // Add styling indicator
+    uploadArea.classList.add("has-image");
   } else {
-    // Create new news
-    await createItem("news",newsData,updateNewsTable, "newsModal","news");
+    // Reset state if no file selected
+    preview.src = "";
+    preview.style.display = "none";
+    placeholder.style.display = "flex";
+    removeBtn.style.display = "none";
+    uploadArea.classList.remove("has-image");
   }
 });
+
 

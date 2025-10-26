@@ -1,32 +1,83 @@
+function statusColor(status) {
+  switch (status?.toLowerCase()) {
+    case "active": return "var(--success)";
+    case "completed": return "var(--primary)";
+    case "planning": return "var(--warning)";
+    case "on-hold": return "var(--secondary)";
+    default: return "var(--light)";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Initialize Select2
+  $("#projectContributors").select2({
+    placeholder: "Select authors",
+    width: "100%",
+    allowClear: true,
+  });
+});
+
+// Remove image
+function removeProjectImage(event) {
+  event.stopPropagation(); // Prevent triggering upload click
+
+  const preview = document.getElementById("imagePreview-project");
+  const placeholder = document.getElementById("uploadPlaceholderProject");
+  const uploadArea = document.getElementById("uploadAreaProject");
+  const removeBtn = document.getElementById("removeProjectImageBtn");
+  const fileInput = document.getElementById("projectImage");
+
+  preview.src = "";
+  preview.style.display = "none";
+  placeholder.style.display = "flex";
+  uploadArea.classList.remove("has-image");
+  removeBtn.style.display = "none";
+  fileInput.value = "";
+}
+
+
+
 // Projects functions
-function updateProjectsTable(sampleData) {
+function updateProjectsTable(Data) {
   const tableBody = document.querySelector("#projectsTable tbody");
   let html = "";
-  if (sampleData.length > 0) {
-    sampleData.forEach((project) => {
-      const statusClass =
-        project.status === "In Progress" ? "badge-success" : "badge-warning";
+  if (Data.length > 0) {
+    Data.forEach((project) => {
+      const {
+        _id,
+        title,
+        tags = [],
+        status,
+        duration,
+        technologies = [],
+        projectContributors = [],
+        createdAt,
+        image
+      } = project;
+
+      const tagDisplay = tags && tags.length >0 ? tags.slice(0, 3).map(t=>`<span class="tech-chip">${t}</span>`).join(" "): " - ";
+      const techDisplay = technologies.slice(0, 2).join(", ") + (technologies.length > 2 ? "…" : "");
+      const contributorDisplay =  projectContributors && projectContributors.length > 0
+        ? projectContributors
+        .map(c => `<span class="author-chip">${c.name || "Unnamed"}</span>`)
+        .join(" ") : "-";
+
       html += `
             <tr>
+                <td><img src="${image || "img/default.png"}" alt="${title}" class="news-thumb"></td>
                 <td>${project.title}</td>
-                <td>${project.category}</td>
-                <td><span class="badge ${statusClass}">${project.status}</span></td>
-                <td>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <div class="progress" style="flex: 1;">
-                            <div class="progress-bar" style="width: ${project.progress}%"></div>
-                        </div>
-                        <span>${project.progress}%</span>
-                    </div>
-                </td>
-                <td>${project.teamLead}</td>
+                <td>${tagDisplay || "-"}</td>
+                <td><span class="status-badge" style="background-color:${statusColor(status)}">${status}</span></td>
+                <td>${duration || "-"}</td>
+                <td>${contributorDisplay || "-"}</td>
+                <td>${techDisplay || "-"}</td>
                 <td>
                     <div class="action-buttons">
-                        <button class="btn btn-primary btn-sm" onClick="openProjectModal(${JSON.stringify(project).replace(/"/g, "&apos;")})">
-                            <i class="fas fa-edit"></i>
+                        <button class="table-btn btn-edit" onClick="openProjectModal(${JSON.stringify(project).replace(/"/g, "&apos;")})">
+                          <img src="./img_dashbord/table/edit.svg" class="edit-icon"/>
                         </button>
-                        <button class="btn btn-danger btn-sm" onClick="deleteItem('${project._id}','projects',updateProjectsTable)">
-                            <i class="fas fa-trash"></i>
+                        <button class="table-btn btn-delete" onClick="deleteItem('${project._id}','projects',updateProjectsTable)">
+                            <img src="./img_dashbord/table/delete.svg" class="delete-icon"/>
                         </button>
                     </div>
                 </td>
@@ -34,7 +85,7 @@ function updateProjectsTable(sampleData) {
     });
   } else {
     html =
-      '<tr><td colspan="6" class="text-center">No projects found.</td></tr>';
+      '<tr><td colspan="8" class="text-center">No projects found.</td></tr>';
   }
 
   tableBody.innerHTML = html;
@@ -45,113 +96,142 @@ function updateProjectsTable(sampleData) {
 //                    Open Modal (Add/Edit Project)
 // -------------------------------------------------------------------
 async function openProjectModal(project = null) {
+  await loadContributors("projectContributors","Select project contributors");
+
   const modal = document.getElementById("projectModal");
   const title = document.getElementById("projectModalTitle");
-  const form = document.getElementById("projectForm");
   const submitBtn = document.getElementById("projectSubmitBtn");
-  const teamLeadSelect = document.getElementById("projectTeamLead");
+  const form = document.getElementById("projectForm");
 
-  // Load team leads before opening modal
-  await loadContributorsForDropdown(teamLeadSelect);
+  const preview = document.getElementById("imagePreview-project");
+  const placeholder = document.getElementById("uploadPlaceholderProject");
+  const uploadArea = document.getElementById("uploadAreaProject");
+  const removeBtn = document.getElementById("removeProjectImageBtn");
+
 
   if (project) {
-    // Edit Mode
     title.textContent = "Edit Project";
     submitBtn.textContent = "Save Changes";
 
     document.getElementById("projectId").value = project._id;
     document.getElementById("projectTitle").value = project.title;
-    document.getElementById("projectDesc").value = project.description;
-    document.getElementById("projectShortDesc").value = project.shortDescription;
-    document.getElementById("projectCategory").value = project.category;
+    document.getElementById("projectTags").value = project.tags?.join(", ") || "";
+    document.getElementById("projectDetails").value = project.details || "";
+    document.getElementById("projectOverview").value = project.overview || "";
+    document.getElementById("projectObjectives").value = project.objectives?.join("\n") || "";
+    document.getElementById("projectOutcomes").value = project.outcomes?.join("\n") || "";
+    document.getElementById("projectTechnicalApproach").value = project.technicalApproach || "";
     document.getElementById("projectStatus").value = project.status;
-    document.getElementById("projectPriority").value = project.priority;
-    document.getElementById("projectStartDate").value = project.startDate ? project.startDate.split("T")[0] : "";
-    document.getElementById("projectEndDate").value = project.endDate ? project.endDate.split("T")[0] : "";
-    document.getElementById("projectBudget").value = project.budget?.amount || "";
-    document.getElementById("projectFunding").value = project.fundingSource || "";
-    document.getElementById("projectTeamLead").value = project.teamLead?._id || "";
+    document.getElementById("projectDuration").value = project.duration || "";
+    document.getElementById("projectFunding").value = project.funding || "";
     document.getElementById("projectTechnologies").value = project.technologies?.join(", ") || "";
-    document.getElementById("projectPublic").checked = project.isPublic || false;
-    document.getElementById("projectFeatured").checked = project.isFeatured || false;
-    document.getElementById("projectProgress").value = project.progress || 0;
+    document.getElementById("projectLink").value = project.link || "";
+
+    if (Array.isArray(project.projectContributors)) {
+        const contributorIds = project.projectContributors.map(a => a._id);
+        const contributorSelect = document.getElementById("projectContributors");
+        for (const option of contributorSelect.options) {
+            option.selected = contributorIds.includes(option.value);
+        }
+    }
+
+
+    preview.src = project.image ? project.image : "./uploads/news.jpg";
+    preview.style.display = "block";
+    placeholder.style.display = "none";
+    uploadArea.classList.add("has-image");
+    removeBtn.style.display = "block";
+
   } else {
-    // Add Mode
     title.textContent = "Add Project";
     submitBtn.textContent = "Add Project";
     form.reset();
-    document.getElementById("projectId").value = "";
+    document.getElementById("projectId").value="";
+    
+    // Reset image
+    removeProjectImage(new Event("click"));
   }
 
   modal.classList.add("active");
 }
 
-// -------------------------------------------------------------------
-//                     Load Contributors (Team Leads)
-// -------------------------------------------------------------------
-async function loadContributorsForDropdown(selectElement) {
-  try {
-    // Clear existing options
-    selectElement.innerHTML = '<option value="">Select Team Lead</option>';
-
-    const res = await fetch(`${API_BASE_URL}/contributors`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`,
-      },
-    });
-
-    const data = await res.json();
-
-    if (data.success && Array.isArray(data.data)) {
-      data.data.forEach((contributor) => {
-        const option = document.createElement("option");
-        option.value = contributor._id;
-        option.textContent = `${contributor.name} (${contributor.department || "No Dept"})`;
-        selectElement.appendChild(option);
-      });
-    } else {
-      console.error("Failed to load contributors.");
-    }
-  } catch (error) {
-    console.error("Error fetching contributors:", error);
-  }
-}
 
 // -------------------------------------------------------------------
 //                           Handle Form Submit
 // -------------------------------------------------------------------
-document.getElementById("projectForm").addEventListener("submit", async function (e) {
+document.getElementById("projectForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const projectId = document.getElementById("projectId").value;
+  const formData = new FormData();
 
-  const projectData = {
-    title: document.getElementById("projectTitle").value,
-    description: document.getElementById("projectDesc").value,
-    shortDescription: document.getElementById("projectShortDesc").value,
-    category: document.getElementById("projectCategory").value,
-    status: document.getElementById("projectStatus").value,
-    priority: document.getElementById("projectPriority").value,
-    startDate: document.getElementById("projectStartDate").value,
-    endDate: document.getElementById("projectEndDate").value || null,
-    budget: {
-      amount: parseFloat(document.getElementById("projectBudget").value) || 0,
-    },
-    fundingSource: document.getElementById("projectFunding").value,
-    teamLead: document.getElementById("projectTeamLead").value,
-    technologies: document.getElementById("projectTechnologies").value.split(",").map(s => s.trim()).filter(Boolean),
-    isPublic: document.getElementById("projectPublic").checked,
-    isFeatured: document.getElementById("projectFeatured").checked,
-    progress: parseInt(document.getElementById("projectProgress").value) || 0
-  };
+  formData.append("title", document.getElementById("projectTitle").value);
+  formData.append("details", document.getElementById("projectDetails").value);
+  formData.append("overview", document.getElementById("projectOverview").value);
+  formData.append("technicalApproach", document.getElementById("projectTechnicalApproach").value);
+  formData.append("status", document.getElementById("projectStatus").value);
+  formData.append("duration", document.getElementById("projectDuration").value);
+  formData.append("funding", document.getElementById("projectFunding").value);
+  formData.append("link", document.getElementById("projectLink").value);
+
+  const imageFile = document.getElementById("projectImage").files[0];
+  if (imageFile) formData.append("image", imageFile);
+
+
+  const selectedContributors = $("#projectContributors").val() || [];
+  selectedContributors.forEach(c => formData.append("projectContributors[]", c));
+  
+  const outcomes=document.getElementById("projectOutcomes").value.split("\n").filter(Boolean)
+  outcomes.forEach(obj=>formData.append("outcomes[]",obj));
+
+  const objectives = document.getElementById("projectObjectives").value.split("\n").filter(Boolean);
+  objectives.forEach(obj => formData.append("objectives[]", obj));
+
+  const tags= document.getElementById("projectTags").value.split(",").map(t => t.trim()).filter(Boolean);
+  tags.forEach(obj=>formData.append("tags[]", obj))
+
+  const technologies=document.getElementById("projectTechnologies").value.split(",").map(t => t.trim()).filter(Boolean);
+  technologies.forEach(obj=>formData.append("technologies[]", obj));
+
+  
+ const repoLines = document
+  .getElementById("projectRepositories")
+  .value.split("\n")
+  .filter(Boolean);
+
+  const repoObjects = repoLines.map((line) => {
+    const [title, description, image, link, type] = line.split("|").map((s) => s.trim());
+    return { title, description, image, link, type };
+  }).filter(r => r.title && r.link);
+
+  formData.append("repositories", JSON.stringify(repoObjects));
+
+
+
 
   if (projectId) {
-    // Edit existing project
-    await editItem("projects", projectId, projectData, "projects", updateProjectsTable, "projectModal");
+    await editItemWithImage("projects", "projects", projectId, formData, updateProjectsTable, "projectModal");
   } else {
-    // Create new project
-    await createItem("projects", projectData, updateProjectsTable, "projectModal", "projects");
+    await createItemWithImage("projects", formData, updateProjectsTable, "projectModal", "projects");
+  }
+});
+
+
+
+document.getElementById("projectImage").addEventListener("change", function () {
+  const file = this.files[0];
+  const preview = document.getElementById("imagePreview-project");
+  const placeholder = document.getElementById("uploadPlaceholderProject");
+  const uploadArea = document.getElementById("uploadAreaProject");
+  const removeBtn = document.getElementById("removeProjectImageBtn");
+
+  if (file) {
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = "block";
+    placeholder.style.display = "none";
+    removeBtn.style.display = "block";
+    uploadArea.classList.add("has-image");
+  } else {
+    removeProjectImage(new Event("click")); // Reset state
   }
 });

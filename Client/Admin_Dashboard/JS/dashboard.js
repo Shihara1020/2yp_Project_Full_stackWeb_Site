@@ -5,10 +5,8 @@ function loadDashboardData(data) {
   document.getElementById("totalContributors").textContent =
     data.stats.totalContributors || 0;
   document.getElementById("totalNews").textContent = data.stats.totalNews || 0;
-  document.getElementById("totalEvents").textContent =
-    data.stats.totalEvents || 0;
-  document.getElementById("totalProjects").textContent =
-    data.stats.totalProjects || 0;
+  document.getElementById("totalEvents").textContent =data.stats.totalPublications || 0;
+  document.getElementById("totalProjects").textContent =data.stats.totalProjects || 0;
 
   // Load recent activities
   updateRecentActivities(data.recentActivities);
