@@ -1,5 +1,5 @@
 // API configurations
-const API_BASE_URL='2ypprojectfullstackwebsite-production.up.railway.app/api/v1';
+const API_BASE_URL='https://2ypprojectfullstackwebsite-production.up.railway.app/api/v1';
 let authToken=localStorage.getItem('adminToken');
 
 
