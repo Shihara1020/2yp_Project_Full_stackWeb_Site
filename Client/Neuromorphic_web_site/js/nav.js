@@ -118,3 +118,44 @@ const nav = document.querySelector(".main-nav");
 btnNav.addEventListener("click", () => {
   document.body.classList.toggle("nav-open");
 });
+
+
+
+// reveal section
+const allSections = document.querySelectorAll('.page');
+
+const revealSection = (entries, observer) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+
+    // Add reveal class
+    entry.target.classList.add('reveal');
+
+    // Optional: stagger child elements
+    const children = entry.target.querySelectorAll('.fade-in');
+    children.forEach((child, i) => {
+      child.style.transitionDelay = `${i * 0.2}s`;
+    });
+
+    observer.unobserve(entry.target);
+  });
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+
+allSections.forEach(section => {
+  sectionObserver.observe(section);
+
+  // Optionally mark children for staggered animation
+  section.querySelectorAll('h2, h3, p, li, img, .hero-main--header, .hero-description').forEach(el => {
+    el.classList.add('fade-in');
+  });
+});
+
+
+
+
+

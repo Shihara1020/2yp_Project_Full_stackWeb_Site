@@ -62,12 +62,43 @@ body {
   color: #555;
 }
 
+
+// reveal section style
+/* Hidden by default */
+.page {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Visible state */
+.page.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional: staggered children animation */
+.page .fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.page.reveal .fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
 /* ***********************
     NAVIGATION SECTION
 **************************/
 
 .header {
-  background-color: #222;
+  background-color: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -92,7 +123,7 @@ body {
 .main-nav-link:visited {
   display: inline-block;
   text-decoration: none;
-  color: #fff;
+  color: #333;
   font-weight: 600;
   font-size: 1.8rem;
   transition: all 0.3s;
@@ -439,5 +470,6 @@ body {
 .subSection-header .back-link:hover {
   opacity: 0.8;
 }
+
 
 
