@@ -32,8 +32,8 @@ const app=express();
 // Enable CORS
 // List of allowed origins
 const allowedOrigins = [
-  "http://127.0.0.1:5501", // Admin panel
-  "http://127.0.0.1:5502", // User frontend (change if different)
+  "https://2yp-project-full-stack-web-site.vercel.app", // Admin panel
+  "https://2yp-project-full-stack-web-site-mcv.vercel.app", // User frontend (change if different)
 ];
 
 // CORS middleware
