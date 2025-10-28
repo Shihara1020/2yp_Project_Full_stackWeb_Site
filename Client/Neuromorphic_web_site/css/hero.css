@@ -217,7 +217,7 @@
     text-transform:uppercase;
     padding:0.4rem 0.8rem;
     color: #212529;
-    background-color: #b197fc;
+    background-color: rgba(135, 203, 228, 0.91);
 }
 
 .project-detials{
@@ -334,7 +334,7 @@
 
 .news-year {
   font-size: 1.4rem;
-  color: #777;
+  color: rgba(93, 118, 154, 0.91);
 }
 
 .news-brief-desc {
@@ -429,7 +429,7 @@
 
 .pub-year {
   font-size: 1.4rem;
-  color: #888;
+  color: rgba(93, 118, 154, 0.91);
 }
 .pub-doi{
   font-size:1.4rem;
@@ -437,7 +437,7 @@
 }
 
 .pub-doi a {
-  color: #007bff;
+  color: rgba(96, 177, 239, 0.91);
   text-decoration: none;
 }
 
@@ -549,7 +549,7 @@
 .blog-meta {
   list-style:none;
   font-size: 1.3rem;
-  color: #777;
+  color: rgba(93, 118, 154, 0.91);
   margin-bottom: 1rem;
   text-align:center;
   display:flex;
