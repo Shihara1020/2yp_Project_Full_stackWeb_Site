@@ -43,8 +43,19 @@ Medium: 12px
 
 - Spacing system (px)
 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+----08.footer,
+     color-#d3d9ddff;
+
+---09.nav,
+     color- #d3d9ddff
+
+
 */
 
+/* ************************************ */
+/*          General Styles              */
+/* ************************************ */
 html {
   font-size: 62.5%;
 }
@@ -62,8 +73,10 @@ body {
   color: #555;
 }
 
+/* ************************************************** */
+/*             reveal section style                   */
+/* ************************************************** */
 
-// reveal section style
 /* Hidden by default */
 .page {
   opacity: 0;
@@ -90,15 +103,13 @@ body {
 }
 
 
-
-
-/* ***********************
-    NAVIGATION SECTION
-**************************/
+/* ******************************************
+              NAVIGATION SECTION
+*********************************************/
 
 .header {
-  background-color: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: transparent; 
+  box-shadow: none; 
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -109,7 +120,7 @@ body {
 }
 
 .escal {
-  height: 2.2rem;
+  height: 2.8rem;
 }
 
 .main-nav-list {
@@ -123,15 +134,15 @@ body {
 .main-nav-link:visited {
   display: inline-block;
   text-decoration: none;
-  color: #333;
+  color:  rgba(192, 221, 249);
   font-weight: 600;
-  font-size: 1.8rem;
+  font-size: 2rem;
   transition: all 0.3s;
 }
 
 .main-nav-link:hover,
 .main-nav-link:active {
-  color: #a18eff;
+  color:  #4c6078ff;
 }
 
 /* When header becomes sticky */
@@ -140,8 +151,6 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   z-index: 100;
   transition: all 0.3s ease;
   animation: fadeSlideDown 0.4s ease forwards;
@@ -154,7 +163,7 @@ body {
 }
 
 .sticky .main-nav-link {
-  color: #333;
+  color: rgba(72, 148, 207, 0.8);
 }
 
 /* Animation for smooth fade and slide-down */
@@ -176,7 +185,7 @@ body {
   bottom: 0;
   height: 3px;
   width: 0;
-  background-color: #a18eff;
+  background-color: rgba(40, 87, 152, 0.91);
   border-radius: 3px;
   transition: all 0.3s ease;
   transform-origin: left;
@@ -191,7 +200,7 @@ body {
 
 /* Active link color */
 .main-nav-link.active {
-  color: #a18eff;
+  color:  rgba(40, 87, 152, 0.91);
   font-weight: 700;
 }
 

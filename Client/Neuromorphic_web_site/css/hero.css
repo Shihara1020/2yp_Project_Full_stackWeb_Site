@@ -2,11 +2,16 @@
            HERO SECTION
 ********************************** */
 
+.landing-page{
+  background-image: linear-gradient(rgba(10, 10, 30, 0.7), rgba(10, 10, 30, 0.7)),url("../img/hero.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+
 .section-hero {
   height: 100vh;
-  background: 
-    linear-gradient(rgba(10, 10, 30, 0.7), rgba(10, 10, 30, 0.7)),
-    url("../img/hero.png") center/cover no-repeat;
   padding: 4.8rem 0 9.6rem 0;
   position: relative;
   display: flex;
@@ -37,20 +42,53 @@
   margin-bottom: 3.2rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #a48fff;
+  color: #e6eaeeff;
 }
 
 
 /* Description */
 .hero-description {
+  font-family: "Poppins", sans-serif;
   font-size: 2.2rem;
   line-height: 1.6;
   margin-bottom: 3.2rem;
+  color: #cbdceb;
 }
 
-/* Button */
+/* hero_section - Button */
 .hero-btn {
-  text-align: left;
+  text-align: center; 
+}
+
+.explore-more-icon{
+  height:2.2rem;
+  width:2.2rem;
+  animation: bounce 1.2s infinite;
+  display:inline-block;
+}
+
+/* Bounce animation */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(4px);
+  }
+  60% {
+    transform: translateY(4px);
+  }
+}
+
+.btn--scroll-to{
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem; 
+}
+
+.hero-learn-btn span {
+  display: inline-block;
 }
 
 .hero-learn-btn:link,
@@ -58,21 +96,25 @@
   text-decoration: none;
   background-color: #fff;
   border-radius: 10px;
-  color: #333;
+  color: #54575aff;
   font-weight: 600;
   font-size: 1.8rem;
-  display: inline-block;
-  padding: 1.2rem 2.4rem;
+  padding: 1.6rem 4.8rem;
   transition: all 0.3s ease;
 }
 
 /* Button hover */
 .hero-learn-btn:hover,
 .hero-learn-btn:active {
-  background-color: #333;
+  background-color: #51606eff;
   color: #fff;
   transform: translateY(-3px);
 }
+
+
+
+
+
 
 
 
@@ -322,7 +364,7 @@
 
 .view-more-btn {
   padding: 1.2rem 2.4rem;
-  background-color: #2fde52;
+  background-color: rgba(40, 87, 152, 0.91);
   color: #fff;
   font-size: 1.6rem;
   font-weight: 600;
@@ -335,7 +377,7 @@
 }
 
 .view-more-btn:hover {
-  background-color: #28c548;
+  background-color: rgba(31, 63, 108, 0.91);
   transform: translateY(-3px);
 }
 
