@@ -184,6 +184,12 @@ html {
   letter-spacing: 0.5px;
   animation: fadeIn 0.3s ease-in-out;
   margin-top:3.6rem;
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
 }
 
 

@@ -31,6 +31,16 @@ function showLoading(show) {
 function showLoginError(message) {
   loginError.textContent = message;
   loginError.classList.remove("hidden-section");
+   loginError.style.opacity = "1";
+
+   // Automatically fade out after 3 seconds
+  setTimeout(() => {
+    loginError.classList.add("fade-out");
+    setTimeout(() => {
+      loginError.classList.add("hidden-section");
+      loginError.style.opacity = "0";
+    }, 500); // matches the transition duration below
+  }, 3000);
 }
 
 
