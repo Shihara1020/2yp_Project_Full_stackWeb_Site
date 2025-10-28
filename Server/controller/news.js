@@ -69,7 +69,7 @@ exports.createNews = asyncHandler(async (req, res, next) => {
   let imageUrl=null;
 
   if (req.file) {
-    imageUrl = `${req.protocol}://${req.get("host")}/uploads/news/${req.file.filename}`;
+    imageUrl = `https://2ypprojectfullstackwebsite-production.up.railway.app/uploads/news/${req.file.filename}`;
   }
 
   const news = await News.create({
@@ -79,7 +79,7 @@ exports.createNews = asyncHandler(async (req, res, next) => {
     author,
     date,
     link,
-    image:imageUrl || `${req.protocol}://${req.get("host")}/uploads/news/news.jpg`,
+    image:imageUrl || `https://2ypprojectfullstackwebsite-production.up.railway.app/uploads/news/news.jpg`,
   });
 
   res.status(201).json({
@@ -110,7 +110,7 @@ exports.updateNews = asyncHandler(async (req, res, next) => {
     }
 
     // Set new image URL
-    req.body.image = `${req.protocol}://${req.get("host")}/uploads/news/${req.file.filename}`;
+    req.body.image = `https://2ypprojectfullstackwebsite-production.up.railway.app/uploads/news/${req.file.filename}`;
   }
 
   news = await News.findByIdAndUpdate(req.params.id, req.body, {

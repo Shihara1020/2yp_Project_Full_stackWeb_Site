@@ -76,7 +76,7 @@ exports.createProjects = asyncHandler(async (req, res, next) => {
   let imageUrl=null;
 
   if (req.file) {
-    imageUrl = `${req.protocol}://${req.get("host")}/uploads/projects/${req.file.filename}`;
+    imageUrl = `https://2ypprojectfullstackwebsite-production.up.railway.app/uploads/projects/${req.file.filename}`;
   }
 
   const project = await Projects.create({
@@ -92,7 +92,7 @@ exports.createProjects = asyncHandler(async (req, res, next) => {
     funding,
     projectContributors,
     repositories,
-    image:imageUrl || `${req.protocol}://${req.get("host")}/uploads/projects/projects.jpg`,
+    image:imageUrl || `https://2ypprojectfullstackwebsite-production.up.railway.app/uploads/projects/projects.jpg`,
   });
 
   res.status(201).json({
@@ -131,7 +131,7 @@ exports.updateProjects = asyncHandler(async (req, res, next) => {
       const oldImagePath = path.join(__dirname, "..", "uploads","projects",oldImageFilename);
       if (fs.existsSync(oldImagePath)) fs.unlinkSync(oldImagePath);
     }
-    req.body.image = `${req.protocol}://${req.get("host")}/uploads/projects/${req.file.filename}`;
+    req.body.image = `https://2ypprojectfullstackwebsite-production.up.railway.app/uploads/projects/${req.file.filename}`;
   }
 
   project = await Projects.findByIdAndUpdate(req.params.id, req.body, {

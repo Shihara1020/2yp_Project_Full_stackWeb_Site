@@ -42,7 +42,7 @@ exports.createContributor = asyncHandler(async (req, res, next) => {
   let imageUrl=null;
 
   if (req.file) {
-    imageUrl = `${req.protocol}://${req.get("host")}/uploads/contributors/${req.file.filename}`;
+    imageUrl = `https://2ypprojectfullstackwebsite-production.up.railway.app/uploads/contributors/${req.file.filename}`;
   }
 
   const contributor = await Contributor.create({
@@ -50,7 +50,7 @@ exports.createContributor = asyncHandler(async (req, res, next) => {
     email,
     position,
     phone,
-    image:imageUrl || `${req.protocol}://${req.get("host")}/uploads/contributors/no-photo.png`,
+    image:imageUrl || `https://2ypprojectfullstackwebsite-production.up.railway.app/uploads/contributors/no-photo.png`,
 });
 
   res.status(201).json({
@@ -79,7 +79,7 @@ exports.updateContributor = asyncHandler(async (req, res, next) => {
   }
 
   // Build absolute URL for the new image
-  req.body.image = `${req.protocol}://${req.get("host")}/uploads/contributors/${req.file.filename}`;
+  req.body.image = `https://2ypprojectfullstackwebsite-production.up.railway.app/uploads/contributors/${req.file.filename}`;
 }
 
 
@@ -93,6 +93,8 @@ exports.updateContributor = asyncHandler(async (req, res, next) => {
     data: contributor,
   });
 });
+
+
 
 // @desc Delete contributor
 // @route DELETE /api/v1/contributors/:id

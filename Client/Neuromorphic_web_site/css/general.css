@@ -475,6 +475,7 @@ body {
 
 .contributor-img{
     width:100%;
+    height:15rem;
 }
 
 .contributor-name{
@@ -494,13 +495,6 @@ body {
 .contributor-text{
     padding:2rem;
 }
-
-.contributor {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
 
 
 /* **********************************
