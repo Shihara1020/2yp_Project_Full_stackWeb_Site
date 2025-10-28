@@ -525,6 +525,7 @@
     gap: 4.8rem;
   }
 
+
   .project-card-text-box {
     padding: 2rem;
     text-align: center;
@@ -545,6 +546,12 @@
 
   .more-details {
     font-size: 1.5rem;
+  }
+
+  /* people */
+  .grid--5--cols {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.4rem;
   }
 
   /* footer */
