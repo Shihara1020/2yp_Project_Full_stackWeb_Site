@@ -11,44 +11,55 @@
     <title>Document</title>
   </head>
   <body>
-    <header class="header">
+    <div class="top-page">
+      <header class="header">
       <a href="#">
         <img src="./img/logo.png" alt="" class="escal" />
       </a>
-      <nav class="mian-nav">
+      <button class="btn-mobile-nav" aria-label="Toggle menu">
+        <span class="hamburger-line line1"></span>
+        <span class="hamburger-line line2"></span>
+        <span class="hamburger-line line3"></span>
+      </button>
+
+      <nav class="main-nav">
         <ul class="main-nav-list">
           <li>
-            <a class="main-nav-link" href="#">How it works</a>
+            <a class="main-nav-link" href="#about">ABOUT</a>
           </li>
           <li>
-            <a class="main-nav-link" href="#">How it works</a>
+            <a class="main-nav-link" href="#news">NEWS</a>
           </li>
           <li>
-            <a class="main-nav-link" href="#">Testimonials</a>
+            <a class="main-nav-link" href="#publications">PUBLICATIONS</a>
           </li>
           <li>
-            <a class="main-nav-link" href="#">Pricing</a>
+            <a class="main-nav-link" href="#blogs">BLOGS</a>
           </li>
           <li>
-            <a class="main-nav-link nav-cta" href="#">Try for free</a>
+            <a class="main-nav-link nav-cta" href="#projects">PROJECTS</a>
+          </li>
+          <li>
+            <a class="main-nav-link nav-cta" href="#supervisors">PEOPLE</a>
           </li>
         </ul>
+        <span class="nav-indicator"></span>
       </nav>
     </header>
 
-    <main>
-      <section class="project-header">
+    <section class="project-header">
         <div class="project-container">
           <div class="project-container-text">
-            <a href="../index.html" class="back-to-project"
-              ><span>&larr;</span> Back to projects</a
-            >
             <h1 class="project-header-name" id="project-title">Loading ..</h1>
-            <p class="project-header-details" id="project-subtitle">Loading .....</p>
+            <p class="project-header-details" id="project-subtitle">
+              Loading .....
+            </p>
           </div>
         </div>
       </section>
 
+    </div>
+    <main>
       <section class="project-details-section">
         <div class="container grid-of-project">
           <div class="main-details" id="project-main-details">
@@ -63,18 +74,21 @@
 
       <section class="section-contributes">
         <div class="container">
-          <h2 class="project-subtopics contribute-header"> Project Contribute </h2> 
+          <h2 class="project-subtopics contribute-header">
+            Project Contribute
+          </h2>
         </div>
 
         <div class="container grid grid--5--cols" id="project-contributors">
-            <!-- Contributors dynamically loaded -->
-        </div>
+          <!-- Contributors dynamically loaded -->
         </div>
       </section>
 
       <section class="section-github">
         <div class="container">
-          <h2 class="project-subtopics contribute-header">GitHub Repositories</h2> 
+          <h2 class="project-subtopics contribute-header">
+            GitHub Repositories
+          </h2>
           <div class="git-repo-grid" id="project-github">
             <!-- GitHub repos dynamically loaded -->
           </div>
@@ -82,6 +96,7 @@
       </section>
     </main>
 
+    <!-- Footer section -->
     <footer class="footer">
       <div class="container footer-grid">
         <div class="footer-1">
@@ -177,7 +192,9 @@
       if (!projectId) return;
 
       async function fetchJSON(path) {
-        const res = await fetch(`https://2ypprojectfullstackwebsite-production.up.railway.app/api/v1/${path}`);
+        const res = await fetch(
+          `https://2ypprojectfullstackwebsite-production.up.railway.app/api/v1/${path}`
+        );
         if (!res.ok) throw new Error(res.statusText);
         return res.json();
       }
@@ -188,7 +205,8 @@
 
         // Project Header
         document.querySelector("#project-title").textContent = project.title;
-        document.querySelector("#project-subtitle").textContent = project.details;
+        document.querySelector("#project-subtitle").textContent =
+          project.details;
 
         // Main Details
         const mainContainer = document.querySelector("#project-main-details");
@@ -240,13 +258,19 @@
               <div class="project-side-card"><h3>Funding</h3><p>${
                 project.funding
               }</p></div>
-              <div class="project-side-card"><h3>Technologies</h3><ul class="tech-list">${project.technologies.map((t) => `<li>${t}</li>`).join("")}</ul></div>
+              <div class="project-side-card"><h3>Technologies</h3><ul class="tech-list">${project.technologies
+                .map((t) => `<li>${t}</li>`)
+                .join("")}</ul></div>
             `;
 
         // Contributors
 
-        const contribContainer = document.querySelector("#project-contributors");
-        contribContainer.innerHTML = project.projectContributors.map((c) => `
+        const contribContainer = document.querySelector(
+          "#project-contributors"
+        );
+        contribContainer.innerHTML = project.projectContributors
+          .map(
+            (c) => `
               <div class="contributor">
                 <img src="${c.image}" class="contributor-img" />
                 <div class="contributor-text">
@@ -254,13 +278,18 @@
                   <p class="contributor-batch">${c.position}</p>
                 </div>
               </div>
-            `).join("");
+            `
+          )
+          .join("");
 
         // GitHub
         const githubContainer = document.querySelector("#project-github");
         githubContainer.innerHTML = project.repositories
           .map((g) => {
-            const imgSrc = g.type.toLowerCase() === "github" ? "./img/default.jpg" : "./img/icon_page.png";
+            const imgSrc =
+              g.type.toLowerCase() === "github"
+                ? "./img/default.jpg"
+                : "./img/icon_page.png";
             return `
               <div class="git-hub-repo">
                 <img src="${imgSrc}" alt="${g.type} Repo" class="github-img" />
@@ -273,8 +302,6 @@
             `;
           })
           .join("");
-
-
       } catch (e) {
         console.error("Failed to load project", e);
       }

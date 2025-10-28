@@ -19,28 +19,6 @@ Paragraph default: 1.6
 - Letter spacing
 -0.5px
 0.75px
-
---- 02 COLORS
-
-- Primary: #e67e22
-- Tints:
-#fdf2e9
-#fae5d3
-#eb984e
-
-- Shades: 
-#cf711f
-#45260a
-
-- Accents:
-- Greys
-
-#888
-#767676 (lightest grey allowed on #fff)
-#6f6f6f (lightest grey allowed on #fdf2e9)
-#555
-#333
-
 --- 05 SHADOWS
 
 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
@@ -61,7 +39,8 @@ Medium: 11px
     HERO SECTION
 ******************** */
 
-.project-header {
+
+.top-page{
   background-image: linear-gradient(
       rgba(34, 34, 34, 0.8),
       rgba(34, 34, 34, 0.8)
@@ -69,9 +48,13 @@ Medium: 11px
     url("./img/hero1.avif");
   background-size: cover;
   background-position: center;
+}
+
+.project-header {
   height: 35vh;
   width: 100%;
 }
+
 .project-container {
   max-width: 120rem;
   margin: 0 auto;
@@ -162,6 +145,7 @@ Medium: 11px
     align-items:center;
     gap:1rem;   
 }
+
 
 /* ********************
     side card
