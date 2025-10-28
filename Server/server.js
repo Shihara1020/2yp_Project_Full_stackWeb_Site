@@ -32,8 +32,6 @@ const app=express();
 // app.use(mongoSanitize());
 app.use(mongoSanitize);
 
-// Set security headers
-app.use(helmet());
 
 // Enable CORS
 // List of allowed origins
@@ -56,6 +54,13 @@ app.use(cors({
   },
   credentials: true,  // Allow cookies/auth headers if needed
 }));
+
+// Set security headers
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+  })
+);
 
 
 //body parser
