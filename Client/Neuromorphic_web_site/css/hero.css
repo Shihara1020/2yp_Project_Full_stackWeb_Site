@@ -201,7 +201,7 @@
 .project-topics{
     font-size:2.4rem;
     font-weight:600;
-    color:#333;
+    color:rgba(26, 63, 114, 0.91);
     margin-bottom:1.6rem;
 }
 
@@ -231,7 +231,7 @@
   position: relative;
   text-decoration: none;
   font-size: 1.6rem;
-  color: #333;
+  color: rgba(48, 66, 92, 0.91);
   padding-bottom: 0.2rem;
   transition: color 0.3s;
   margin-bottom:16rem;
@@ -245,17 +245,17 @@
   transform: translateX(-50%); 
   width: 100%;             
   height: 1px;
-  background-color:  #e67e22;
+  background-color:  rgba(17, 36, 61, 0.91);
   transition: all 0.3s ease;
 }
 
 .more-details:hover {
-  color: #e67e22;
+  color:  rgba(17, 36, 61, 0.91);
 }
 
 .more-details:hover::after {
   width: 50%;         
-  background-color: #e67e22;
+  background-color:  rgba(17, 36, 61, 0.91);
 }
 
 .project-card-footer{
@@ -271,7 +271,7 @@
     width:4.8rem;
     border-radius:50%;
     margin-left:-1.6rem;
-    border:3px solid #e67e22;
+    border:3px solid  rgba(17, 36, 61, 0.91);
 }
 
 .project-card-member:first-child{
@@ -329,6 +329,7 @@
   font-weight: 600;
   font-size: 2.4rem;
   line-height: 1.4;
+  color:rgba(26, 63, 114, 0.91);
 }
 
 .news-year {
@@ -418,6 +419,7 @@
   font-size: 2rem;
   font-weight: 600;
   line-height: 1.4;
+  color:rgba(26, 63, 114, 0.91);
 }
 
 .pub-authors {
@@ -538,7 +540,7 @@
 
 .blog-title {
   font-size: 2rem;
-  color: #494949ff;
+  color: rgba(26, 63, 114, 0.91);
   margin-bottom: 2rem;
   text-align:center;
   line-height:1.4;
@@ -574,7 +576,7 @@
 }
 
 .blog-read-more-btn{
-  background-color: #9cc2f4ff;
+  background-color: rgba(40, 87, 152, 0.91);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -595,6 +597,6 @@
 }
 
 .btn-read-more:hover {
-  color: #c5e0e9ff;
+  color: rgba(31, 63, 108, 0.91);
 }
 

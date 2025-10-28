@@ -1,5 +1,6 @@
 (function () {
   const API_BASE_URL = "https://2ypprojectfullstackwebsite-production.up.railway.app/api/v1";
+  
 
   //   fetch the from backend 
   async function fetchJSON(path) {
