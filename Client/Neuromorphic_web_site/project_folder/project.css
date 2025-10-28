@@ -280,7 +280,7 @@
 .repo-desc {
   font-size: 1.6rem;
   line-height: 1.5;
-  color: #555;
+  color: -rgba(48, 66, 92, 0.91);
 }
 
 .github-link {

@@ -12,6 +12,7 @@ Bold: 700
 
 - Spacing system (px)
 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+#1c1c24ff;
 */
 html {
   font-size: 62.5%;
@@ -19,7 +20,7 @@ html {
 
 .loginPage {
   font-family: sans-serif;
-  background-color: #1c1c24ff;
+  background-color: #3a3a4cff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,7 +31,7 @@ html {
   width: 80rem;
   height: 45rem;
   border-radius: 1.2rem;
-  box-shadow: 0 0 2.5rem #7d2ae8;
+  box-shadow: 0 0 2.5rem rgba(56, 80, 114, 0.91);
   overflow: hidden;
   position: relative;
 }
@@ -82,7 +83,7 @@ html {
   right: 1rem;
   top: 30%;
   transition: translateY(-50%);
-  color: #aaa;
+  color: #313a5dff;
   width: 1.8rem;
   height: 1.8rem;
 }
@@ -96,11 +97,11 @@ html {
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
-  background: linear-gradient(90deg, #6c00ff, #b900ff);
+  background:  rgba(40, 87, 152, 0.91);
 }
 
 .login-btn:hover {
-  background: linear-gradient(90deg, #b900ff, #6c00ff);
+  background: rgba(31, 63, 108, 0.91);
 }
 
 .signup-text {
@@ -111,7 +112,7 @@ html {
 }
 
 .signup-text a {
-  color: #b900ff;
+  color: rgba(31, 63, 108, 0.91);
   text-decoration: none;
   font-weight: 600;
 }
@@ -126,7 +127,7 @@ html {
 
 .welcome-section {
   flex: 1;
-  background: linear-gradient(135deg, #4b00b0 0%, #8a00ff 100%);
+  background: rgba(31, 63, 108, 0.91);
   clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
   display: flex;
   align-items: center;

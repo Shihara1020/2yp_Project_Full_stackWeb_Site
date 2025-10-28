@@ -163,6 +163,9 @@ body {
   font-size: 1.6rem;
 }
 
+
+
+
 /************ Cards************ */
 .card {
   background: var(--white);
@@ -191,6 +194,9 @@ body {
 .card-body {
   padding: 20px;
 }
+
+
+
 
 /* ***********Stat Cards ******************************/
 .stats-grid {
@@ -312,16 +318,12 @@ tbody tr:hover {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  background:  rgba(40, 87, 152, 0.91);
   color: var(--white);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(
-    135deg,
-    var(--primary-dark) 0%,
-    var(--secondary) 100%
-  );
+  background:  rgba(31, 63, 108, 0.91);
 }
 
 .btn-secondary {

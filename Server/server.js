@@ -6,8 +6,8 @@ const connectDB=require('./config/db');
 const cookieParser=require('cookie-parser');
 const cors=require('cors');
 const path = require('path');
-
-
+const helmet = require("helmet");
+const mongoSanitize=require('./middleware/sanitizer');
 
 
 //First Load the env variable
@@ -28,6 +28,12 @@ const blogs=require('./router/blogs');
 //create a express app
 const app=express();
 
+// Sanitize data 
+// app.use(mongoSanitize());
+app.use(mongoSanitize);
+
+// Set security headers
+app.use(helmet());
 
 // Enable CORS
 // List of allowed origins
