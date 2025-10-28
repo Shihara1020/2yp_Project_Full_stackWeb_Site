@@ -4,10 +4,9 @@
 
 .section-hero {
   height: 100vh;
-  background-image: url("../img/hero.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: 
+    linear-gradient(rgba(10, 10, 30, 0.7), rgba(10, 10, 30, 0.7)),
+    url("../img/hero.png") center/cover no-repeat;
   padding: 4.8rem 0 9.6rem 0;
   position: relative;
   display: flex;
@@ -29,14 +28,7 @@
   max-width: 650px;
 }
 
-/* Heading */
-/* .hero-main--header {
-  font-size: 5.2rem;
-  margin-bottom: 3.2rem;
-  line-height: 1.1;
-  font-weight: 800;
-} */
-
+/* Header */
 .hero-main--header {
   font-family: "Orbitron", sans-serif;
   font-size: 5.2rem;
