@@ -655,6 +655,61 @@ select.form-control {
   transition: 0.2s ease;
 }
 
+
+
+
+
+
+
+
+/* ************Popup Container*************** */
+.popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #333;
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 9999;
+}
+
+/* ✅ Success color */
+.popup.success {
+  background: #2ecc71;
+}
+
+/* ❌ Error color */
+.popup.error {
+  background: #e74c3c;
+}
+
+/* Fade animation */
+.popup.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Icon styling */
+#popupIcon {
+  font-size: 18px;
+}
+
+
+
+
+
+
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .modal-content {

@@ -9,6 +9,41 @@ function closeModal(modalId) {
   document.getElementById(modalId).classList.remove("active");
 }
 
+// Error message display function
+function showPopup(message, type = "success") {
+  const popup = document.getElementById("globalPopup");
+  const msg = document.getElementById("popupMessage");
+  const icon = document.getElementById("popupIcon");
+
+  // Set message and type
+  msg.textContent = message;
+
+  // Set icon and color
+  if (type === "success") {
+    icon.textContent = "✅";
+    popup.classList.remove("error");
+    popup.classList.add("success");
+  } else {
+    icon.textContent = "❌";
+    popup.classList.remove("success");
+    popup.classList.add("error");
+  }
+
+  // Show popup
+  popup.classList.remove("hidden-section");
+  popup.classList.add("show");
+
+  // Auto hide after 3 seconds
+  setTimeout(() => {
+    popup.classList.remove("show");
+    setTimeout(() => {
+      popup.classList.add("hidden-section");
+    }, 400);
+  }, 3000);
+}
+
+
+
 //*********************************************** */
 //              Load function
 //*********************************************** */
@@ -60,11 +95,15 @@ async function deleteItem(userId, type, updateTable) {
 
     if (response.ok && data.success) {
       console.log(`${type} deleted successfully!`);
+      showPopup(`${type} deleted successfully!`, "success");
       loadSection(type, updateTable);
       //   reloadFunction();
+    }else{
+      showPopup(data.message || `Failed to delete ${type}.`, "error");
     }
   } catch (error) {
     console.log(`Failed to ${type}:`, error.message);
+    showPopup(`Failed to delete ${type}.`, "error");
   } finally {
     showLoading(false);
   }
@@ -95,13 +134,16 @@ async function createItem(type, data, updateTable, modalId, endpoint) {
 
     if (res.ok && result.success) {
       console.log(`${type} created successfully!`);
+      showPopup(`${type} created successfully!`, "success");
       closeModal(modalId);
       loadSection(endpoint, updateTable);
     } else {
       console.log(`Failed to create ${type}`);
+      showPopup(result.message || `Failed to create ${type}.`, "error");
     }
   } catch (error) {
     console.log(`Failed to create ${type}: ` + error.message);
+    showPopup(error.message || `Failed to create ${type}.`, "error");
   } finally {
     showLoading(false);
   }
@@ -133,8 +175,11 @@ async function editItem(
 
     if (res.ok && result.success) {
       console.log(`${type} updated successfully!`);
+      showPopup(`${type} updated successfully!`, "success");
       closeModal(modalId);
       loadSection(endpoint, updateTable);
+    }else{
+      showPopup(result.message || `Failed to update ${type}.`, "error");
     }
   } catch (error) {
     console.log(`Failed to update ${type}: ` + error.message);
@@ -170,14 +215,17 @@ async function editItemWithImage(
 
     if (res.ok && result.success) {
       console.log(`${type} created successfully!`);
+      showPopup(`${type} update successfully!`, "success");
       closeModal(modalId);
       loadSection(endpoint, updateTable);
     } else {
-      console.log(`Failed to create ${type}`);
+      console.log(`Failed to update ${type}`);
+      showPopup(result.message || `Failed to update ${type}.`, "error");
     }
     
   } catch (error) {
-    console.log(`Failed to create ${type}: ` + error.message);
+    console.log(`Failed to update ${type}: ` + error.message);
+    showPopup(`Failed to update ${type}.`, "error");
   } finally {
     showLoading(false);
   }
@@ -218,13 +266,16 @@ async function createItemWithImage(
 
     if (res.ok && result.success) {
       console.log(`${type} created successfully!`);
+      showPopup(`${type} created successfully!`, "success");
       closeModal(modalId);
       loadSection(endpoint, updateTable);
     } else {
       console.log(`Failed to create ${type}`);
+      showPopup(result.message || `Failed to create ${type}.`, "error");
     }
   } catch (error) {
     console.log(`Failed to create ${type}: ` + error.message);
+    showPopup(`Failed to create ${type}.`, "error");
   } finally {
     showLoading(false);
   }
@@ -267,3 +318,7 @@ async function loadContributors(selectId,placeholder="Select contributors") {
     console.error("Error loading contributors:", err);
   }
 }
+
+
+
+
