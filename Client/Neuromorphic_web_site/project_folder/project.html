@@ -4,10 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="./project.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/general.css" />
+    <link rel="stylesheet" href="../css/general.css"/>
     <link rel="stylesheet" href="./query.css" />
     <link rel="stylesheet" href="../css/query.css" />
-    <link href="css/query.css" rel="stylesheet" />
     <title>Document</title>
   </head>
   <body>
@@ -334,5 +333,13 @@
         console.error("Failed to load project", e);
       }
     })();
+  </script>
+  <script >
+    const nav = document.querySelector(".main-nav");
+
+    btnNav.addEventListener("click", () => {
+      document.body.classList.toggle("nav-open");
+    });
+
   </script>
 </html>

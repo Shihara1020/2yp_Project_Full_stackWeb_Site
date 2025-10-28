@@ -33,6 +33,12 @@
     padding: 0 2rem;
   }
 
+  /* icons */  
+  .link-icons{
+    height:3.2rem;
+    width: 3.2rem;
+  }
+
 
   /* about section */
   .about-description{
@@ -117,11 +123,18 @@
   }
 
   .hero-main--header {
-    font-size: 3.8rem;
+    font-size: 4.2rem;
   }
+
 
   .hero-description {
     font-size: 1.8rem;
+  }
+
+  
+  .link-icons{
+    height:2rem;
+    width: 2rem;
   }
 
 
@@ -368,7 +381,7 @@
 /* ≤700px */
 @media (max-width: 700px) {
   .hero-main--header {
-    font-size: 3.2rem;
+    font-size: 4.2rem;
   }
 
   .hero-description {
@@ -378,6 +391,17 @@
   .hero-learn-btn {
     font-size: 1.6rem;
     padding: 1rem 2rem;
+  }
+
+  .hero-learn-btn:link,
+  .hero-learn-btn:visited{
+    font-size:1.5rem;
+    padding:1rem 2rem;
+  }
+
+  .explore-more-icon{
+    height:1.8rem;
+    width:1.8rem;
   }
 
   /* about-section */
@@ -575,6 +599,11 @@
   .hero-learn-btn {
     font-size: 1.4rem;
     padding: 0.8rem 1.8rem;
+  }
+  
+  .link-icons{
+    height:1.6rem;
+    width: 1.6rem;
   }
 
 
