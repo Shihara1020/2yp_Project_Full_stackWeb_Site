@@ -7,7 +7,7 @@
 }
 
 .news-sub-header{
-  border-bottom: 1px solid #2d2c2cff;
+  border-bottom: 1px solid rgba(30, 64, 111, 0.91);
    padding:2rem 0;
    max-width:120rem;
    margin:0 auto;
@@ -44,7 +44,7 @@
 }
 
 .news-title{
-  color: #3a3838ff;
+  color:rgba(30, 64, 111, 0.91);
   font-size:2.2rem;
   margin-bottom:1.2rem;
 }
