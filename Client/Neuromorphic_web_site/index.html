@@ -3,11 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link href="css/hero.css" rel="stylesheet" />
     <link href="css/general.css" rel="stylesheet" />
     <link href="css/query.css" rel="stylesheet" />
@@ -16,39 +25,38 @@
   <body>
     <div class="landing-page">
       <header class="header">
+        <a href="#">
+          <img src="./img/logo.png" alt="" class="escal" />
+        </a>
+        <button class="btn-mobile-nav" aria-label="Toggle menu">
+          <span class="hamburger-line line1"></span>
+          <span class="hamburger-line line2"></span>
+          <span class="hamburger-line line3"></span>
+        </button>
 
-      <a href="#">
-        <img src="./img/logo.png" alt="" class="escal" />
-      </a>
-      <button class="btn-mobile-nav" aria-label="Toggle menu">
-        <span class="hamburger-line line1"></span>
-        <span class="hamburger-line line2"></span>
-        <span class="hamburger-line line3"></span>
-      </button>
-
-      <nav class="main-nav">
-        <ul class="main-nav-list">
-          <li>
-            <a class="main-nav-link" href="#about">ABOUT</a>
-          </li>
-          <li>
-            <a class="main-nav-link" href="#news">NEWS</a>
-          </li>
-          <li>
-            <a class="main-nav-link" href="#publications">PUBLICATIONS</a>
-          </li>
-          <li>
-            <a class="main-nav-link" href="#blogs">BLOGS</a>
-          </li>
-          <li>
-            <a class="main-nav-link nav-cta" href="#projects">PROJECTS</a>
-          </li>
-          <li>
-            <a class="main-nav-link nav-cta" href="#supervisors">PEOPLE</a>
-          </li>
-        </ul>
-        <span class="nav-indicator"></span>
-      </nav>
+        <nav class="main-nav">
+          <ul class="main-nav-list">
+            <li>
+              <a class="main-nav-link" href="#about">ABOUT</a>
+            </li>
+            <li>
+              <a class="main-nav-link" href="#news">NEWS</a>
+            </li>
+            <li>
+              <a class="main-nav-link" href="#publications">PUBLICATIONS</a>
+            </li>
+            <li>
+              <a class="main-nav-link" href="#blogs">BLOGS</a>
+            </li>
+            <li>
+              <a class="main-nav-link nav-cta" href="#projects">PROJECTS</a>
+            </li>
+            <li>
+              <a class="main-nav-link nav-cta" href="#supervisors">PEOPLE</a>
+            </li>
+          </ul>
+          <span class="nav-indicator"></span>
+        </nav>
       </header>
 
       <!-- Section of Hero -->
@@ -67,12 +75,17 @@
             </p>
 
             <div class="hero-btn">
-              <a href="#about" class="hero-learn-btn btn--scroll-to"><span>Exploring more</span><img src="./img/icons/arrow_icon.svg" class="explore-more-icon"></a>
+              <a href="#about" class="hero-learn-btn btn--scroll-to"
+                ><span>Exploring more</span
+                ><img
+                  src="./img/icons/arrow_icon.svg"
+                  class="explore-more-icon"
+              /></a>
             </div>
           </div>
         </div>
       </section>
-    </div>    
+    </div>
     <main>
       <!-- section of About -->
       <section class="section-about page" id="about">
@@ -128,9 +141,7 @@
         </div>
 
         <div class="container main-news" id="news-container">
-          
           <!-- News will be loaded dynamically -->
-          
         </div>
 
         <div class="view-more-news">
@@ -152,9 +163,7 @@
         </div>
 
         <div class="container main-publications" id="publication-container">
-
           <!-- Publication will be loaded dynamically  -->
-          
         </div>
       </section>
 
@@ -170,7 +179,7 @@
         </div>
 
         <div class="container blog-grid" id="blog-container">
-             <!-- Blogs will be loaded dynamically -->
+          <!-- Blogs will be loaded dynamically -->
         </div>
       </section>
 
@@ -186,11 +195,8 @@
         </div>
 
         <div class="container grid grid grid--3--cols" id="project-container">
-          
-           <!-- Projects will be loaded dynamically -->
-
+          <!-- Projects will be loaded dynamically -->
         </div>
-
       </section>
 
       <!-- Section of People -->
@@ -209,7 +215,10 @@
           <div class="container">
             <h3 class="inherheader">Contributors as team members</h3>
 
-            <div class="main-contributors grid grid--5--cols" id="team-container">
+            <div
+              class="main-contributors grid grid--5--cols"
+              id="team-container"
+            >
               <!-- Team members will be loaded dynamically -->
             </div>
           </div>
@@ -219,8 +228,11 @@
         <section class="contributors-group">
           <div class="container">
             <h3 class="inherheader">Contributors as project supervisors</h3>
-            <div class="main-contributors grid grid--5--cols" id="supervisors-container">
-                   <!-- Superviors will be loaded dynamically -->
+            <div
+              class="main-contributors grid grid--5--cols"
+              id="supervisors-container"
+            >
+              <!-- Superviors will be loaded dynamically -->
             </div>
           </div>
         </section>
@@ -232,7 +244,12 @@
       <div class="container footer-grid">
         <div class="footer-1">
           <a href="#" class="footer-logo">
-            <img src="./img/customers/logo.png" alt="" class="escal" />
+            <img
+              src="./img/logo-3.png"
+              alt=""
+              class="escal"
+              style="height: 3.8rem"
+            />
           </a>
 
           <p class="footer-desc">
@@ -275,20 +292,41 @@
         <nav class="nav-col">
           <p class="footer-heading">Quick Links</p>
           <ul class="footer-nav">
-            <li><a class="footer-link" href="#">Home</a></li>
-            <li><a class="footer-link" href="#">About</a></li>
-            <li><a class="footer-link" href="#">News</a></li>
-            <li><a class="footer-link" href="#">Projects</a></li>
+            <li><a class="footer-link" href="#news">News</a></li>
+            <li><a class="footer-link" href="#publications">Publication</a></li>
+            <li><a class="footer-link" href="#blogs">Blog</a></li>
+            <li><a class="footer-link" href="#projects">Projects</a></li>
+            <li><a class="footer-link" href="#supervisors">People</a></li>
           </ul>
         </nav>
 
         <nav class="nav-col">
-          <p class="footer-heading">Account</p>
+          <p class="footer-heading">Other Websites</p>
           <ul class="footer-nav">
-            <li><a class="footer-link" href="#">Create account</a></li>
-            <li><a class="footer-link" href="#">Sign in</a></li>
-            <li><a class="footer-link" href="#">iOS app</a></li>
-            <li><a class="footer-link" href="#">Android app</a></li>
+            <li>
+              <a
+                class="footer-link"
+                href="https://2yp-project-full-stack-web-site.vercel.app"
+                target="_blank"
+                >Admin Panel</a
+              >
+            </li>
+            <li>
+              <a
+                class="footer-link"
+                href="https://escal.ce.pdn.ac.lk"
+                target="_blank"
+                >ESCAL</a
+              >
+            </li>
+            <li>
+              <a
+                class="footer-link"
+                href="https://www.ce.pdn.ac.lk"
+                target="_blank"
+                >Peracom</a
+              >
+            </li>
           </ul>
         </nav>
 
@@ -318,15 +356,18 @@
     <script src="./js/nav.js"></script>
     <script src="./js/api.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', function(){
+      document.addEventListener("DOMContentLoaded", function () {
         try {
-          window.NEURO_API.loadNews('#news-container');
-          window.NEURO_API.loadPublications('#publication-container');
-          window.NEURO_API.loadBlogs('#blog-container');
-          window.NEURO_API.loadProjects('#project-container');
-          window.NEURO_API.loadPeoples('#team-container','#supervisors-container')
+          window.NEURO_API.loadNews("#news-container");
+          window.NEURO_API.loadPublications("#publication-container");
+          window.NEURO_API.loadBlogs("#blog-container");
+          window.NEURO_API.loadProjects("#project-container");
+          window.NEURO_API.loadPeoples(
+            "#team-container",
+            "#supervisors-container"
+          );
         } catch (e) {
-          console.error('Failed to initialize API loaders', e);
+          console.error("Failed to initialize API loaders", e);
         }
       });
     </script>

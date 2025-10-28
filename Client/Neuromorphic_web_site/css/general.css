@@ -209,7 +209,7 @@ body {
 
 /* Active link color */
 .main-nav-link.active {
-  color:  rgba(40, 87, 152, 0.91);
+  color:  rgba(149, 158, 171, 0.91);
   font-weight: 700;
 }
 
@@ -218,7 +218,7 @@ body {
          mobile navigation 
 *********************************** */
 
-.btn-mobile-nav{
+/* .btn-mobile-nav{
   border:none;
   cursor:pointer;
   background:none;
@@ -234,7 +234,7 @@ body {
 
 .icon-mobile-nav[name="close"]{
   display:none;
-}
+} */
 
 
 
@@ -244,23 +244,18 @@ body {
             footer 
 *********************************** */
 .footer{
-    padding:12.8rem 0 6.4rem 0; 
-    0;
-    border-top:2px solid #363535ff;
-    background-color:#000;
+    padding:6rem 0 3rem 0; 
+    border-top:2px solid #1e234fff;
+    background-color: #9fa2a3ff;
+    color: #273747ff;
 }
-.footer-line{
-    text-align:center;
-    border-top:1px solid blue;
-    margin-bottom:0 0 2rem 0; 
-    padding:4.8rem 0 0 0;
 
-}
 .footer-grid{
     display:grid;
-    grid-template-columns:1.5fr 1.5fr 1fr 1fr 1fr;
-    column-gap:6.4rem;
-    row-gap:9.6rem;
+    grid-template-columns:1.5fr 1.2fr 1fr 1fr 1fr;
+    column-gap: 5rem;
+    row-gap: 4rem;
+    align-items:start;
 }
 
 .footer-logo {
@@ -268,68 +263,123 @@ body {
   margin-bottom: 3.2rem;
 }
 
+.footer-desc{
+    margin-bottom:4rem;
+    font-size:1.6rem;
+    line-height:1.8;
+}
+
 .social-links {
   list-style: none;
   display: flex;
   gap: 2.4rem;
-  margin-bottom:4.8rem;
+  margin-bottom: 2.8rem;
 }
 
 .social-icon {
   height: 3rem;
   width: 3rem;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.copyright {
-  font-size: 1.8rem;
-  line-height: 1.6;
-  color: #767676;
-  margin-top: auto;
+.social-icon:hover {
+  transform: scale(1.2);
+  color: #1e3e75;
 }
 
 .footer-heading {
   font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 4rem;
-}
-
-.footer-desc{
-    margin-bottom:4rem;
-    font-size:1.6rem;
-    line-height:1.8;
-
-}
-
-.contacts {
-  font-style: normal;
-  font-size: 1.6rem;
-  line-height: 1.6;
-  
-}
-
-.address {
-  margin-bottom: 2.4rem;
+  margin-bottom: 2rem;
+  color: rgba(52, 87, 136, 0.91);
+  border-left: 4px solid rgba(52, 87, 136, 0.91);
+  padding-left: 0.6rem;
 }
 
 .footer-nav {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
+  gap: 2rem;
 }
 
 .footer-link:link,
 .footer-link:visited {
   text-decoration: none;
   font-size: 1.6rem;
-  color: #767676;
-  transition: all 0.3s;
+  color:rgba(48, 66, 92, 0.91);
+  transition: all 0.3s ease;
 }
 
 .footer-link:hover,
 .footer-link:active {
-  color: #555;
+  color:rgba(58, 90, 138, 0.91);
 }
+
+.address {
+  margin-bottom: 2.4rem;
+}
+
+.contacts {
+  font-style: normal;
+  font-size: 1.6rem;
+  line-height: 1.6;
+}
+
+.footer-line{
+    text-align:center;
+    border-top:1px solid  #1e234fff;
+    margin-top-2rem; 
+    padding-top:2rem;
+
+}
+
+.copyright {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color:rgba(31, 47, 69, 0.91);
+}
+
+
+
+/* **********************************
+       subsection footer
+*********************************** */
+
+.subSection-footer {
+  background-color: #9fa2a3ff;
+  color: rgba(31, 47, 69, 0.91);
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 1.3rem;
+  border-top: 3px solid #1e234fff;
+}
+
+
+
+/* **********************************
+       header footer
+*********************************** */
+.subSection-header {
+  color: #fff;
+  padding: 6rem 0 3rem;
+  text-align: center;
+  border-radius: 0 0 2rem 2rem;
+}
+
+.subSection-header .back-link {
+  display: inline-block;
+  color: #5b7bbeff;
+  text-decoration: none;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  transition: opacity 0.3s;
+}
+
+.subSection-header .back-link:hover {
+  opacity: 0.8;
+}
+
 
 
 
@@ -447,7 +497,7 @@ body {
 
 
 /* **********************************
-       icons and tags
+         icons and tags
 *********************************** */
 
 .link-icons{
@@ -456,41 +506,7 @@ body {
 }
 
 
-/* **********************************
-       subsection footer
-*********************************** */
 
-.subSection-footer {
-  background-color: #222;
-  color: #ddd;
-  text-align: center;
-  padding: 2rem 0;
-  font-size: 1.3rem;
-  border-top: 3px solid #2b70c3ff;
-}
-
-/* **********************************
-       header footer
-*********************************** */
-.subSection-header {
-  color: #fff;
-  padding: 6rem 0 3rem;
-  text-align: center;
-  border-radius: 0 0 2rem 2rem;
-}
-
-.subSection-header .back-link {
-  display: inline-block;
-  color: #5b7bbeff;
-  text-decoration: none;
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
-  transition: opacity 0.3s;
-}
-
-.subSection-header .back-link:hover {
-  opacity: 0.8;
-}
 
 
 
