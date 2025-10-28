@@ -88,7 +88,6 @@
 
 .news-content p {
   margin-bottom: 3.2rem;
-  border-top: 3px solid #1e234fff;
 }
 
 
@@ -101,6 +100,7 @@
   text-align: center;
   padding: 2rem 0;
   font-size: 1.6rem;
+  border-top: 3px solid #1e234fff;
 }
 
 
