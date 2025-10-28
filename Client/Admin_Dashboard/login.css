@@ -172,7 +172,6 @@ html {
 
 /* --- Login Error Alert --- */
 #loginError {
-  display: none; /* hidden by default until an error occurs */
   background: rgba(255, 0, 0, 0.1); /* subtle red overlay */
   border: 1px solid #ff4d4d;
   color: #ff4d4d;
@@ -186,6 +185,14 @@ html {
   animation: fadeIn 0.3s ease-in-out;
   margin-top:3.6rem;
 }
+
+
+
+
+
+
+
+
 
 /* Optional glowing animation */
 @keyframes fadeIn {
