@@ -153,13 +153,13 @@
 }
 
 .about-stats-number {
-  color: #212529;
+  color: rgba(13, 37, 68, 0.91);
   font-size: 2.4rem;
   font-weight: 700;
 }
 
 .icon-desc {
-  color: #343a40;
+  color: rgba(48, 66, 92, 0.91);
   font-size: 2rem;
   font-weight: 500;
 }
@@ -222,7 +222,7 @@
 
 .project-detials{
     font-size:1.8rem;
-    color:#6f6f6f;
+    color:rgba(48, 66, 92, 0.91);
     line-height:1.6;
     margin-bottom:3rem;
 }
@@ -340,6 +340,7 @@
   font-size: 1.6rem;
   line-height: 1.6;
   margin-bottom: 1.6rem;
+  color:rgba(48, 66, 92, 0.91);
 }
 
 .read-details {
@@ -421,7 +422,7 @@
 
 .pub-authors {
   font-size: 1.4rem;
-  color: #555;
+  color: rgba(48, 66, 92, 0.91);
 }
 
 .pub-year {
@@ -430,7 +431,7 @@
 }
 .pub-doi{
   font-size:1.4rem;
-  color: #555;
+  color: rgba(48, 66, 92, 0.91);
 }
 
 .pub-doi a {
@@ -445,7 +446,7 @@
 .pub-desc {
   font-size: 1.6rem;
   line-height: 1.6;
-  color: #444;
+  color: rgba(48, 66, 92, 0.91);
 }
 
 .pub-link {
@@ -567,7 +568,7 @@
 
 .blog-desc {
   font-size: 1.5rem;
-  color: #333;
+  color: rgba(48, 66, 92, 0.91);
   margin-bottom: 1.5rem;
   padding:0 2rem;
 }
