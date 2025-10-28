@@ -143,6 +143,14 @@ Medium: 11px
     side card
 **********************/
 
+
+.sub-details {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+
 .project-side-card {
   background: rgba(203, 220, 235, 0.35);
   backdrop-filter: blur(10px);
