@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }else{
         console.log('Show the loging page');
         showLoginPage();
+        
     }
 
     // setup navigation

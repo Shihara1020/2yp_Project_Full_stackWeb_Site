@@ -9,6 +9,7 @@ function logout() {
 function showLoginPage() {
   loginPage.classList.remove("hidden-section");
   adminPanel.classList.add("hidden-section");
+  loginError.classList.add("hidden-section");
 }
 
 function showAdminPanel() {
