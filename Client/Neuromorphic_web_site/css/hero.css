@@ -129,7 +129,7 @@
 
 .about-description {
   font-size: 1.8rem;
-  color: #6f6f6f;
+  color: rgba(48, 66, 92, 0.91);
   line-height: 1.8;
   margin-bottom: 3.2rem;
 }
@@ -596,11 +596,4 @@
 .btn-read-more:hover {
   color: #c5e0e9ff;
 }
-
-
-
-
-
-
-
 
