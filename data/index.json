@@ -1,5 +1,6 @@
 {
     "title": "PeraMorphiq - Full-Stack Web Platform",
+    "description": "A comprehensive full-stack web application developed for the PeraMorphiq at the University of Peradeniya. This platform serves as a centralized hub for managing and showcasing research and project in neuromorphic computing. The system features a robust backend API built with Node.js and Express.js, integrated with MongoDB for scalable data management, and includes a modern responsive frontend with an advanced admin dashboard for content management. Key functionalities include multi-role authentication (Admin, Publisher, Student, Lecturer), dynamic content management for research projects, news, publications, and blogs, secure file handling, and real-time data synchronization. The platform demonstrates advanced web development practices including RESTful API design, JWT-based authentication, responsive UI/UX design, and production-ready deployment architecture.",
     "team": [
     {
         "name": "D.M.E.S.DEWAGEDARA",
