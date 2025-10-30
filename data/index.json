@@ -1,0 +1,32 @@
+{
+    "title": "PeraMorphiq - Full-Stack Web Platform",
+    "team": [
+    {
+        "name": "D.M.E.S.DEWAGEDARA",
+        "email": "e21087@eng.pdn.ac.lk",
+        "eNumber": "E/21/087"
+    },
+    {
+        "name": "W.S.S.PERERA",
+        "email": "e21302@eng.pdn.ac.lk",
+        "eNumber": "E/21/302"
+    },
+    {
+        "name": "J.M.S.D.B.JAYASUNDARA",
+        "email": "e21198@eng.pdn.ac.lk",
+        "eNumber": "E/21/198"
+    },
+    {
+        "name": "Y.P.SANDEEP",
+        "email": "e21353@eng.pdn.ac.lk",
+        "eNumber": "E/21/353"
+    }
+    ],
+    "supervisors": [
+    {
+        "name": "Ms. Yasodha Vimukthi",
+        "email": "yasodhav@eng.pdn.ac.lk"
+    }
+    ],
+    "tags": ["Web Development", "Full-Stack", "Node.js", "MongoDB", "Express.js", "Research Platform", "Content Management", "RESTful API", "JWT Authentication", "Admin Dashboard", "Responsive Design"]
+}
