@@ -38,6 +38,8 @@ app.use(mongoSanitize);
 const allowedOrigins = [
   "https://2yp-project-full-stack-web-site.vercel.app", // Admin panel
   "https://2yp-project-full-stack-web-site-mcv.vercel.app", // User frontend (change if different)
+  "https://peramorphiq-admin.vercel.app",
+  "https://peramorphiq.vercel.app",
 ];
 
 // CORS middleware
