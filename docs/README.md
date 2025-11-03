@@ -85,7 +85,8 @@ Notes:
 
 ## Links
 - [Project Repository](https://github.com/cepdnaclk/e21-CO227-PeraMorphiq.git)
-- [Project Page (GitHub Pages)](https://peramorphiq.vercel.app)
+- [Main Website](https://peramorphiq.vercel.app)
+- [Admin Panel](https://peramorphiq-admin.vercel.app)
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
 - [University of Peradeniya](https://eng.pdn.ac.lk/)
 
