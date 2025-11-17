@@ -11,13 +11,9 @@ title: PeraMorphiq - Full-Stack Web Platform
 
 # PeraMorphiq - Full-Stack Web Platform
 
+![Main Project Image](./images/main.png)
+
 ---
-
-<!-- 
-This is a sample image, to show how to add images to your page. To learn more options, please refer [this](https://projects.ce.pdn.ac.lk/docs/faq/how-to-add-an-image/)
-
-![Sample Image](./images/sample.png)
- -->
 
 ## Team
 - E/21/087, D.M.E.S.DEWAGEDARA, [e21087@eng.pdn.ac.lk](mailto:e21087@eng.pdn.ac.lk)
@@ -85,7 +81,7 @@ Notes:
 
 ## Links
 - [Project Repository](https://github.com/cepdnaclk/e21-CO227-PeraMorphiq.git)
-- [Main Website](https://peramorphiq.vercel.app)
+- [Main Website](https://peramorphiq.github.io/PeraMorphIQ-Web/)
 - [Admin Panel](https://peramorphiq-admin.vercel.app)
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
 - [University of Peradeniya](https://eng.pdn.ac.lk/)
